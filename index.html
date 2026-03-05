@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no">
+    <title>TEAMPLAYER - 혁신적인 IT 솔루션으로 미래를 만듭니다</title>
+    <meta name="description" content="㈜팀플레이어의 혁신적인 IT 솔루션으로 비즈니스의 새로운 가능성을 열어보세요.">
+    <meta name="keywords" content="TEAMPLAYER, ㈜팀플레이어, IT 솔루션, 혁신 기술">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/_next/static/css/39bcdfad396de2e6.css">
+    <style>
+        /* 추가 스타일 */
+        .nav-menu li:nth-child(6) a { /* 회사소식 메뉴 스타일 */
+            font-weight: 500;
+        }
+
+        /* News Section Styles */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .news-date {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .news-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="/teamplayer-logo.png" alt="TEAMPLAYER">
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#about">회사소개</a></li>
+                    <li><a href="#features">IMSMS</a></li>
+                    <li><a href="#services">서비스</a></li>
+                    <li><a href="#partners">파트너</a></li>
+                    <li><a href="#vision">비전</a></li>
+                    <li><a href="#news">회사소식</a></li>
+                    <li><a href="#contact">문의·상담</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <div class="language-selector">
+                        <button class="lang-btn active">한</button>
+                        <button class="lang-btn">EN</button>
+                        <button class="lang-btn">あ</button>
+                    </div>
+                    <button class="theme-toggle">🌙</button>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="mobile-menu">
+                <div class="mobile-menu-content">
+                    <div class="mobile-menu-header">
+                        <div class="mobile-logo">
+                            <img src="/teamplayer-logo.png" alt="TEAMPLAYER">
+                        </div>
+                        <button class="mobile-close-btn" aria-label="Close mobile menu">✕</button>
+                    </div>
+                    <nav class="mobile-nav">
+                        <a href="#about">회사소개</a>
+                        <a href="#features">IMSMS</a>
+                        <a href="#services">서비스</a>
+                        <a href="#partners">파트너</a>
+                        <a href="#vision">비전</a>
+                        <a href="#news">회사소식</a>
+                        <a href="#contact">문의·상담</a>
+                    </nav>
+                    <div class="mobile-menu-footer">
+                        <div class="mobile-language-selector">
+                            <button class="mobile-lang-btn active">한국어</button>
+                            <button class="mobile-lang-btn">English</button>
+                            <button class="mobile-lang-btn">日本語</button>
+                        </div>
+                        <button class="mobile-theme-toggle">
+                            <span>🌙 다크 모드</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section id="home" class="hero">
+            <div class="glass-orb orb-1"></div>
+            <div class="glass-orb orb-2"></div>
+            <div class="glass-orb orb-3"></div>
+            <div class="glass-orb orb-4"></div>
+            <div class="glass-orb orb-5"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span>혁신적인 IT 솔루션</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="gradient-text">재미있는 IT 기술을</span><br>
+                        <span class="gradient-text-secondary">창조합니다</span>
+                    </h1>
+                    <p class="hero-description">
+                        <span>2016년부터 혁신적인 IT 솔루션으로<br></span>
+                        <span>고객의 비용 절감과 운영 효율을 극대화합니다</span>
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#about" class="btn-glass-primary">
+                            <span>자세히 알아보기</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title"><span class="gradient-text">TEAMPLAYER</span> 소개</h2>
+                    <p class="section-subtitle">혁신적인 기술력으로 미래를 선도하는 IT 전문 기업</p>
+                </div>
+                <div class="card-grid">
+                    <div class="glass-card">
+                        <div class="card-icon"><span>🏢</span></div>
+                        <h3>회사 개요</h3>
+                        <div class="card-list">
+                            <div class="list-item">
+                                <span class="label">대표자</span>
+                                <span class="value">김원철</span>
+                            </div>
+                            <div class="list-item">
+                                <span class="label">설립일</span>
+                                <span class="value">2016년 11월 1일</span>
+                            </div>
+                            <div class="list-item">
+                                <span class="label">소재지</span>
+                                <span class="value">경기도 용인시</span>
+                            </div>
+                            <div class="list-item">
+                                <span class="label">주요 품목</span>
+                                <span class="value">응용소프트웨어</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="card-icon"><span>💡</span></div>
+                        <h3>핵심 가치</h3>
+                        <p class="card-description">
+                            <span>'재미있는 IT 기술'을 창조한다는 철학으로<br></span>
+                            <span>자체 R&D 기술력을 중심으로<br></span>
+                            <span>혁신적인 서비스를 개발·제공하는<br></span>
+                            <span>IT 전문 기업입니다.</span>
+                        </p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="card-icon"><span>🚀</span></div>
+                        <h3>경쟁력</h3>
+                        <div class="feature-list">
+                            <div class="feature-item">독보적 R&D 역량</div>
+                            <div class="feature-item">빠른 기술 검증과 상용화</div>
+                            <div class="feature-item">문제 해결 중심 접근</div>
+                            <div class="feature-item">글로벌 확장성</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="gradient-text">
+                            <span>차세대 기업 메시징<br></span>
+                            <span>플랫폼 - IMSMS</span>
+                        </span>
+                    </h2>
+                    <p class="section-subtitle">Intelligent Message Service Management System</p>
+                    <p class="section-description">아이폰 사용자에게 무료로 메시지 발송! 기존 SMS 대비 최대 90% 비용 절감</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card-glass">
+                        <div class="feature-icon-glass">💰</div>
+                        <h3>비용 절감</h3>
+                        <p>기존 이동통신사 대비 최대 90% 이상 비용 절감</p>
+                    </div>
+                    <div class="feature-card-glass">
+                        <div class="feature-icon-glass">📱</div>
+                        <h3>완벽한 호환성</h3>
+                        <p>아이폰 기본 메시지 앱과 완벽 호환, 별도 앱 설치 불필요</p>
+                    </div>
+                    <div class="feature-card-glass">
+                        <div class="feature-icon-glass">⚡</div>
+                        <h3>대용량 처리</h3>
+                        <p>시간당 최대 100만 건, 1회 최대 10만 건 발송 지원</p>
+                    </div>
+                    <div class="feature-card-glass">
+                        <div class="feature-icon-glass">🎨</div>
+                        <h3>리치 콘텐츠</h3>
+                        <p>고화질 이미지·영상, 템플릿, 쿠폰 등 다양한 포맷 지원</p>
+                    </div>
+                    <div class="feature-card-glass">
+                        <div class="feature-icon-glass">💬</div>
+                        <h3>양방향 소통</h3>
+                        <p>RCS 기반 실시간 응답 처리, 고객 맞춤형 대화형 메시징</p>
+                    </div>
+                    <div class="feature-card-glass">
+                        <div class="feature-icon-glass">🛡️</div>
+                        <h3>보안 & 안정성</h3>
+                        <p>종단간 암호화, 스팸 차단 최소화, 100% 전송 커버리지</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="history" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="gradient-text">TEAMPLAYER</span><span class="nobr">의 발자취</span>
+                    </h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card-glass">
+                            <div class="timeline-year">2016</div>
+                            <h4>회사 설립</h4>
+                            <p><span>TEAMPLAYER 창립</span></p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card-glass">
+                            <div class="timeline-year">2017</div>
+                            <h4>방송 시스템 구축</h4>
+                            <p>
+                                <span>CJ ENM, CGV DIS 시스템 구축<br></span>
+                                <span>CNTV, ch.China CMS 개발</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card-glass">
+                            <div class="timeline-year">2018</div>
+                            <h4>부동산 기술 개발</h4>
+                            <p>
+                                <span>부동산 데이터 분석 시스템 개발<br></span>
+                                <span>권리분석 전문 기업 기술 이전</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card-glass">
+                            <div class="timeline-year">2020</div>
+                            <h4>혁신 기술 확보</h4>
+                            <p>
+                                <span>TESLA LVDS 모듈 해킹 기술<br></span>
+                                <span>전국 부동산 통합 전산화</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card-glass">
+                            <div class="timeline-year">2021-2022</div>
+                            <h4>IMSMS 개발</h4>
+                            <p><span>아이폰 기반 대량 메시지 발송 기술 개발 및 고도화</span></p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card-glass">
+                            <div class="timeline-year">2023</div>
+                            <h4>IMSMS 출시</h4>
+                            <p>
+                                <span>IMSMS 솔루션 정식 출시<br></span>
+                                <span>핵심 기술 특허 등록</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card-glass">
+                            <div class="timeline-year">2024</div>
+                            <h4>글로벌 진출</h4>
+                            <p>
+                                <span>IMSMS 상용화<br></span>
+                                <span>MWC, SLUSH, WEBSUMMIT 참가</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="gradient-text">TEAMPLAYER의</span><br>
+                        <span class="gradient-text">다양한 기술 서비스</span>
+                    </h2>
+                </div>
+                <div class="service-grid">
+                    <div class="service-card-glass">
+                        <div class="service-icon">🏠</div>
+                        <h3>부동산 데이터 통합</h3>
+                        <ul class="service-list">
+                            <li>전국 부동산 데이터 표준화·통합</li>
+                            <li>머신러닝 기반 95% 이상 정확도</li>
+                            <li>전세 사기 실시간 감지·알림</li>
+                            <li>HUG와 11개 1금융권 API 제공</li>
+                        </ul>
+                    </div>
+                    <div class="service-card-glass">
+                        <div class="service-icon">📺</div>
+                        <h3>미디어 콘텐츠 시스템</h3>
+                        <ul class="service-list">
+                            <li>영상·음성·이미지 통합 처리</li>
+                            <li>방송사·OTT 맞춤형 CMS</li>
+                            <li>대용량 실시간 인코딩</li>
+                            <li>CJ ENM, CGV DIS 구축 경험</li>
+                        </ul>
+                    </div>
+                    <div class="service-card-glass">
+                        <div class="service-icon">🚗</div>
+                        <h3>차량 디스플레이 기술</h3>
+                        <ul class="service-list">
+                            <li>TESLA LVDS 프로토콜 분석</li>
+                            <li>차량 인포테인먼트 커스터마이징</li>
+                            <li>HUD 시스템 개선 기술</li>
+                            <li>외부 기기 연동 솔루션</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="partners" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="gradient-text">TEAMPLAYER의</span><br>
+                        <span class="gradient-text">글로벌 네트워크</span>
+                    </h2>
+                </div>
+                <div class="partners-container">
+                    <div class="partners-column">
+                        <h3 class="partners-subtitle">글로벌 엑스포 참가</h3>
+                        <div class="expo-grid">
+                            <div class="expo-card-glass">
+                                <div class="expo-icon">🌍</div>
+                                <strong>MWC 2024</strong>
+                                <span>바르셀로나</span>
+                            </div>
+                            <div class="expo-card-glass">
+                                <div class="expo-icon">❄️</div>
+                                <strong>SLUSH 2024</strong>
+                                <span>헬싱키</span>
+                            </div>
+                            <div class="expo-card-glass">
+                                <div class="expo-icon">🚀</div>
+                                <strong>WEBSUMMIT 2024</strong>
+                                <span>리스본</span>
+                            </div>
+                            <div class="expo-card-glass">
+                                <div class="expo-icon">🗾</div>
+                                <strong>JAPAN IT WEEK 2024</strong>
+                                <span>도쿄</span>
+                            </div>
+                            <div class="expo-card-glass">
+                                <div class="expo-icon">🌸</div>
+                                <strong>JAPAN IT WEEK 2025</strong>
+                                <span>도쿄</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="partners-column">
+                        <h3 class="partners-subtitle">주요 파트너사</h3>
+                        <div class="partner-list">
+                            <div class="partner-card-glass">
+                                <div>
+                                    <strong>Getwifi</strong>
+                                    <span>카자흐스탄</span>
+                                </div>
+                                <span class="badge-success">협의 및 BMT</span>
+                            </div>
+                            <div class="partner-card-glass">
+                                <div>
+                                    <strong>goiMessage</strong>
+                                    <span>포르투갈</span>
+                                </div>
+                                <span class="badge-success">협의 및 BMT</span>
+                            </div>
+                            <div class="partner-card-glass">
+                                <div>
+                                    <strong>Ritorica</strong>
+                                    <span>러시아</span>
+                                </div>
+                                <span class="badge-info">BMT 진행 중</span>
+                            </div>
+                            <div class="partner-card-glass">
+                                <div>
+                                    <strong>Telecom 23</strong>
+                                    <span>유럽</span>
+                                </div>
+                                <span class="badge-info">BMT 진행 중</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vision" class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">미래 비전</h2>
+                    <p class="vision-description">
+                        <span>2025년 일본과 포르투갈 진출을 시작으로,<br></span>
+                        <span><strong>2028년까지 연매출 800억 원 달성을 목표로 합니다.</strong></span>
+                    </p>
+                </div>
+                <div class="vision-grid">
+                    <div class="vision-card-glass">
+                        <div class="vision-icon">📈</div>
+                        <h4>시장 확대</h4>
+                        <p>일본, 유럽, 미국 시장 진출</p>
+                    </div>
+                    <div class="vision-card-glass">
+                        <div class="vision-icon">🤖</div>
+                        <h4>AI 기술 융합</h4>
+                        <p>AI 기반 마케팅 분석 서비스</p>
+                    </div>
+                    <div class="vision-card-glass">
+                        <div class="vision-icon">☁️</div>
+                        <h4>인프라 확충</h4>
+                        <p>클라우드 기반 글로벌 인프라</p>
+                    </div>
+                    <div class="vision-card-glass">
+                        <div class="vision-icon">🔐</div>
+                        <h4>보안 강화</h4>
+                        <p>개인정보 보호 기술 고도화</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">회사소식</h2>
+                    <p class="section-subtitle">TEAMPLAYER의 최신 소식과 활동</p>
+                </div>
+                <div class="news-grid" id="newsGrid">
+                    <!-- News items will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">
+                        지금 바로 <span class="gradient-text">TEAMPLAYER</span>와<br>함께하세요
+                    </h2>
+                    <p class="cta-description">혁신적인 IT 기술로 비즈니스의 새로운 가능성을 열어드립니다</p>
+                    <div class="cta-buttons">
+                        <a href="/consultation.html" class="btn-cta-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                            </svg>
+                            상담 문의하기
+                        </a>
+                        <a href="/consultation.html" class="btn-cta-secondary">상담 요청하기</a>
+                    </div>
+                    <div class="contact-info">
+                        <a href="tel:1522-8061" class="contact-item">
+                            <span class="contact-icon">📞</span>
+                            <span>1522-8061</span>
+                        </a>
+                        <a href="tel:070-8080-0511" class="contact-item">
+                            <span class="contact-icon">📞</span>
+                            <span>070-8080-0511</span>
+                        </a>
+                        <a href="mailto:charles@teamplayer.co.kr" class="contact-item">
+                            <span class="contact-icon">✉️</span>
+                            <span>charles@teamplayer.co.kr</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <img src="/teamplayer-logo.png" alt="TEAMPLAYER" class="footer-logo">
+                        <p class="footer-tagline" id="footer-tagline">㈜팀플레이어 - 재미있는 IT 기술을 창조합니다</p>
+                    </div>
+                    <div class="footer-info">
+                        <p id="footer-copyright">© 2024 TEAMPLAYER Inc. All rights reserved.</p>
+                        <p id="footer-ceo">대표이사: 김원철 | 설립: 2016년 11월 1일</p>
+                        <p id="footer-address">경기도 용인시 기흥구 동백로 22</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 모바일 메뉴 토글
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.mobile-menu').classList.toggle('active');
+        });
+
+        // 모바일 메뉴 닫기 버튼
+        document.querySelector('.mobile-close-btn').addEventListener('click', function() {
+            document.querySelector('.mobile-menu-btn').classList.remove('active');
+            document.querySelector('.mobile-menu').classList.remove('active');
+        });
+
+        // 다크모드 토글
+        document.querySelector('.theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark');
+        });
+
+        // Translation data
+        const translations = {
+            ko: {
+                nav: {
+                    about: '회사소개',
+                    imsms: 'IMSMS',
+                    services: '서비스',
+                    partners: '파트너',
+                    vision: '비전',
+                    news: '회사소식',
+                    contact: '문의·상담'
+                },
+                hero: {
+                    badge: '혁신적인 IT 솔루션',
+                    title1: '재미있는 IT 기술을',
+                    title2: '창조합니다',
+                    description: '2016년부터 혁신적인 IT 솔루션으로<br>고객의 비용 절감과 운영 효율을 극대화합니다',
+                    cta: '자세히 알아보기'
+                },
+                about: {
+                    title: 'TEAMPLAYER 소개',
+                    subtitle: '혁신적인 기술력으로 미래를 선도하는 IT 전문 기업',
+                    overview: '회사 개요',
+                    ceo: '대표자',
+                    ceoName: '김원철',
+                    founded: '설립일',
+                    foundedDate: '2016년 11월 1일',
+                    employees: '임직원 수',
+                    employeesCount: '10명',
+                    location: '위치',
+                    locationDetail: '서울특별시 금천구',
+                    business: '주요 사업',
+                    businessDetail: 'IMSMS 솔루션 개발 및 공급',
+                    revenue: '연 매출',
+                    revenueDetail: '20억원 (2023년)',
+                    tech: '핵심 기술',
+                    techList: ['아이폰 메시지 대량 발송', 'AI 기반 메시지 분석', '클라우드 인프라 관리']
+                },
+                imsms: {
+                    title: 'IMSMS 기술',
+                    subtitle: '아이폰 메시지 대량 발송 혁신',
+                    tech1: '대량 발송',
+                    tech1Desc: '100만 건/일 이상 처리 가능한 고성능 시스템',
+                    tech2: '실시간 분석',
+                    tech2Desc: 'AI 기반 메시지 효과 분석 및 리포트',
+                    tech3: '보안 & 안정성',
+                    tech3Desc: '종단간 암호화, 스팸 차단 최소화, 100% 전송 커버리지'
+                },
+                history: {
+                    title: 'TEAMPLAYER의 발자취',
+                    y2016: '회사 설립',
+                    y2016Desc: 'TEAMPLAYER 창립',
+                    y2017: '방송 시스템 구축',
+                    y2017Desc: 'CJ ENM, CGV DIS 시스템 구축<br>CNTV, ch.China CMS 개발',
+                    y2018: '부동산 기술 개발',
+                    y2018Desc: '부동산 데이터 분석 시스템 개발<br>권리분석 전문 기업 기술 이전',
+                    y2020: '다국어 교육',
+                    y2020Desc: '원격 토크 교실 시스템 개발<br>다국어 지원 교육 솔루션',
+                    y2022: 'IMSMS 개발',
+                    y2022Desc: 'iMessage 메시징 솔루션 개발 착수',
+                    y2023: '특허 취득',
+                    y2023Desc: 'IMSMS 핵심 기술 특허 5건 취득<br>일본, 유럽 시장 진출 준비',
+                    y2024: '글로벌 진출',
+                    y2024Desc: 'MWC, SLUSH, WEBSUMMIT 참가<br>글로벌 파트너십 구축'
+                },
+                services: {
+                    title: '다양한 산업 분야별 솔루션',
+                    s1Title: '부동산 데이터 통합',
+                    s1List: ['전국 부동산 데이터 표준화·통합', '머신러닝 기반 95% 이상 정확도', '전세 사기 실시간 감지·알림', 'HUG와 11개 1금융권 API 제공'],
+                    s2Title: '방송 시스템 구축',
+                    s2List: ['CJ ENM 방송 송출 시스템', 'CNTV 중국 VOD 관리 시스템', 'ch.China CMS 개발 및 운영', '실시간 스트리밍 플랫폼 개발'],
+                    s3Title: '다국어 교육 플랫폼',
+                    s3List: ['AI 기반 원격 토크 교실 시스템', '200개국 언어 실시간 번역', '화상 교육 통합 플랫폼', '학습 데이터 분석 및 리포트']
+                },
+                partners: {
+                    title: '글로벌 파트너십',
+                    subtitle: '글로벌 엑스포 참가',
+                    korea: '한국',
+                    japan: '일본',
+                    europe: '유럽',
+                    bmt: 'BMT 진행 중',
+                    discussion: '도입 논의 중',
+                    mwc: 'MWC 바르셀로나',
+                    mwcDesc: '세계 최대 모바일 전시회',
+                    slush: 'SLUSH 헬싱키',
+                    slushDesc: '유럽 최대 스타트업 컨퍼런스',
+                    websummit: 'WEBSUMMIT 리스본',
+                    websummitDesc: '세계 최대 테크 컨퍼런스'
+                },
+                vision: {
+                    title: '미래 비전',
+                    description: '2025년 일본과 포르투갈 진출을 시작으로,<br><strong>2028년까지 연매출 800억 원 달성을 목표로 합니다.</strong>',
+                    v1Title: '시장 확대',
+                    v1Desc: '일본, 유럽, 미국 시장 진출',
+                    v2Title: 'AI 기술 융합',
+                    v2Desc: 'AI 기반 마케팅 분석 서비스',
+                    v3Title: '인프라 확충',
+                    v3Desc: '클라우드 기반 글로벌 인프라',
+                    v4Title: '보안 강화',
+                    v4Desc: '개인정보 보호 기술 고도화'
+                },
+                news: {
+                    title: '회사소식',
+                    subtitle: 'TEAMPLAYER의 최신 소식과 활동'
+                },
+                contact: {
+                    title: '지금 바로 TEAMPLAYER와<br>함께하세요',
+                    subtitle: '혁신적인 IT 기술로 비즈니스의 새로운 가능성을 열어드립니다',
+                    downloadProfile: '회사소개서 다운로드',
+                    consultation: '상담 요청하기'
+                },
+                footer: {
+                    tagline: '㈜팀플레이어 - 재미있는 IT 기술을 창조합니다',
+                    copyright: '© 2024 TEAMPLAYER Inc. All rights reserved.',
+                    ceoInfo: '대표이사: 김원철 | 설립: 2016년 11월 1일',
+                    address: '경기도 용인시 기흥구 동백로 22',
+                    company: '(주)팀플레이어',
+                    business: '사업자등록번호',
+                    businessNum: '409-87-00646',
+                    ceo: '대표',
+                    ceoName: '김원철',
+                    tel: '전화',
+                    telNum: '02-6959-4050',
+                    email: '이메일',
+                    emailAddr: 'teamplayer@teamplayer.co.kr',
+                    addressDetail: '서울특별시 금천구 가산디지털2로 108, 305호'
+                }
+            },
+            en: {
+                nav: {
+                    about: 'About',
+                    imsms: 'IMSMS',
+                    services: 'Services',
+                    partners: 'Partners',
+                    vision: 'Vision',
+                    news: 'News',
+                    contact: 'Contact'
+                },
+                hero: {
+                    badge: 'Innovative IT Solutions',
+                    title1: 'Creating Fun',
+                    title2: 'IT Technology',
+                    description: 'Since 2016, maximizing customer cost savings<br>and operational efficiency with innovative IT solutions',
+                    cta: 'Learn More'
+                },
+                about: {
+                    title: 'About TEAMPLAYER',
+                    subtitle: 'Leading IT company pioneering the future with innovative technology',
+                    overview: 'Company Overview',
+                    ceo: 'CEO',
+                    ceoName: 'Won-Cheol Kim',
+                    founded: 'Founded',
+                    foundedDate: 'November 1, 2016',
+                    employees: 'Employees',
+                    employeesCount: '10',
+                    location: 'Location',
+                    locationDetail: 'Geumcheon-gu, Seoul',
+                    business: 'Main Business',
+                    businessDetail: 'IMSMS Solution Development & Supply',
+                    revenue: 'Annual Revenue',
+                    revenueDetail: 'KRW 2B (2023)',
+                    tech: 'Core Technology',
+                    techList: ['iPhone Message Bulk Sending', 'AI-based Message Analysis', 'Cloud Infrastructure Management']
+                },
+                imsms: {
+                    title: 'IMSMS Technology',
+                    subtitle: 'iPhone Message Bulk Sending Innovation',
+                    tech1: 'Bulk Sending',
+                    tech1Desc: 'High-performance system capable of processing over 1M messages/day',
+                    tech2: 'Real-time Analysis',
+                    tech2Desc: 'AI-based message effectiveness analysis and reporting',
+                    tech3: 'Security & Stability',
+                    tech3Desc: 'End-to-end encryption, minimal spam blocking, 100% delivery coverage'
+                },
+                history: {
+                    title: 'TEAMPLAYER Journey',
+                    y2016: 'Company Established',
+                    y2016Desc: 'TEAMPLAYER Founded',
+                    y2017: 'Broadcasting System',
+                    y2017Desc: 'CJ ENM, CGV DIS System Built<br>CNTV, ch.China CMS Developed',
+                    y2018: 'Real Estate Tech',
+                    y2018Desc: 'Real Estate Data Analysis System<br>Technology Transfer to Rights Analysis Company',
+                    y2020: 'Multilingual Education',
+                    y2020Desc: 'Remote Talk Classroom System<br>Multilingual Support Education Solution',
+                    y2022: 'IMSMS Development',
+                    y2022Desc: 'iMessage Messaging Solution Development Started',
+                    y2023: 'Patent Acquisition',
+                    y2023Desc: '5 IMSMS Core Technology Patents<br>Japan, Europe Market Entry Preparation',
+                    y2024: 'Global Expansion',
+                    y2024Desc: 'MWC, SLUSH, WEBSUMMIT Participation<br>Global Partnership Building'
+                },
+                services: {
+                    title: 'Industry-Specific Solutions',
+                    s1Title: 'Real Estate Data Integration',
+                    s1List: ['National real estate data standardization', '95%+ accuracy with machine learning', 'Real-time fraud detection & alerts', 'HUG and 11 major bank API services'],
+                    s2Title: 'Broadcasting System',
+                    s2List: ['CJ ENM broadcast transmission system', 'CNTV China VOD management system', 'ch.China CMS development & operation', 'Real-time streaming platform development'],
+                    s3Title: 'Multilingual Education Platform',
+                    s3List: ['AI-powered remote talk classroom system', '200 countries real-time translation', 'Integrated video education platform', 'Learning data analysis & reporting']
+                },
+                partners: {
+                    title: 'Global Partnership',
+                    subtitle: 'Global Expo Participation',
+                    korea: 'Korea',
+                    japan: 'Japan',
+                    europe: 'Europe',
+                    bmt: 'BMT in Progress',
+                    discussion: 'Under Discussion',
+                    mwc: 'MWC Barcelona',
+                    mwcDesc: "World's Largest Mobile Exhibition",
+                    slush: 'SLUSH Helsinki',
+                    slushDesc: "Europe's Largest Startup Conference",
+                    websummit: 'WEBSUMMIT Lisbon',
+                    websummitDesc: "World's Largest Tech Conference"
+                },
+                vision: {
+                    title: 'Future Vision',
+                    description: 'Starting with Japan and Portugal expansion in 2025,<br><strong>Targeting KRW 80B annual revenue by 2028.</strong>',
+                    v1Title: 'Market Expansion',
+                    v1Desc: 'Entering Japan, Europe, US markets',
+                    v2Title: 'AI Integration',
+                    v2Desc: 'AI-based marketing analysis service',
+                    v3Title: 'Infrastructure',
+                    v3Desc: 'Cloud-based global infrastructure',
+                    v4Title: 'Security Enhancement',
+                    v4Desc: 'Advanced privacy protection technology'
+                },
+                news: {
+                    title: 'Company News',
+                    subtitle: 'Latest news and activities from TEAMPLAYER'
+                },
+                contact: {
+                    title: 'Get Started with<br>TEAMPLAYER Today',
+                    subtitle: 'Opening new business possibilities with innovative IT technology',
+                    downloadProfile: 'Download Company Profile',
+                    consultation: 'Request Consultation'
+                },
+                footer: {
+                    tagline: 'TEAMPLAYER Inc. - Creating Fun IT Technology',
+                    copyright: '© 2024 TEAMPLAYER Inc. All rights reserved.',
+                    ceoInfo: 'CEO: Won-Cheol Kim | Founded: November 1, 2016',
+                    address: '22, Dongbaek-ro, Giheung-gu, Yongin-si, Gyeonggi-do',
+                    company: 'TEAMPLAYER Inc.',
+                    business: 'Business Registration',
+                    businessNum: '409-87-00646',
+                    ceo: 'CEO',
+                    ceoName: 'Won-Cheol Kim',
+                    tel: 'Tel',
+                    telNum: '+82-2-6959-4050',
+                    email: 'Email',
+                    emailAddr: 'teamplayer@teamplayer.co.kr',
+                    addressDetail: '305, 108, Gasan Digital 2-ro, Geumcheon-gu, Seoul'
+                }
+            },
+            ja: {
+                nav: {
+                    about: '会社紹介',
+                    imsms: 'IMSMS',
+                    services: 'サービス',
+                    partners: 'パートナー',
+                    vision: 'ビジョン',
+                    news: '会社ニュース',
+                    contact: 'お問い合わせ'
+                },
+                hero: {
+                    badge: '革新的なITソリューション',
+                    title1: '楽しいIT技術を',
+                    title2: '創造します',
+                    description: '2016年から革新的なITソリューションで<br>お客様のコスト削減と運営効率を最大化します',
+                    cta: '詳しく見る'
+                },
+                about: {
+                    title: 'TEAMPLAYER紹介',
+                    subtitle: '革新的な技術力で未来を先導するIT専門企業',
+                    overview: '会社概要',
+                    ceo: '代表取締役',
+                    ceoName: 'キム・ウォンチョル',
+                    founded: '設立日',
+                    foundedDate: '2016年11月1日',
+                    employees: '従業員数',
+                    employeesCount: '10名',
+                    location: '所在地',
+                    locationDetail: 'ソウル特別市衿川区',
+                    business: '主要事業',
+                    businessDetail: 'IMSMSソリューション開発及び供給',
+                    revenue: '年間売上高',
+                    revenueDetail: '20億ウォン (2023年)',
+                    tech: 'コア技術',
+                    techList: ['iPhoneメッセージ大量送信', 'AI基盤メッセージ分析', 'クラウドインフラ管理']
+                },
+                imsms: {
+                    title: 'IMSMS技術',
+                    subtitle: 'iPhoneメッセージ大量送信革新',
+                    tech1: '大量送信',
+                    tech1Desc: '100万件/日以上処理可能な高性能システム',
+                    tech2: 'リアルタイム分析',
+                    tech2Desc: 'AI基盤メッセージ効果分析及びレポート',
+                    tech3: 'セキュリティ & 安定性',
+                    tech3Desc: 'エンドツーエンド暗号化、スパムブロック最小化、100%送信カバレッジ'
+                },
+                history: {
+                    title: 'TEAMPLAYERの歩み',
+                    y2016: '会社設立',
+                    y2016Desc: 'TEAMPLAYER創立',
+                    y2017: '放送システム構築',
+                    y2017Desc: 'CJ ENM、CGV DISシステム構築<br>CNTV、ch.China CMS開発',
+                    y2018: '不動産技術開発',
+                    y2018Desc: '不動産データ分析システム開発<br>権利分析専門企業技術移転',
+                    y2020: '多言語教育',
+                    y2020Desc: 'リモートトーク教室システム開発<br>多言語対応教育ソリューション',
+                    y2022: 'IMSMS開発',
+                    y2022Desc: 'iMessageメッセージングソリューション開発着手',
+                    y2023: '特許取得',
+                    y2023Desc: 'IMSMSコア技術特許5件取得<br>日本、欧州市場進出準備',
+                    y2024: 'グローバル展開',
+                    y2024Desc: 'MWC、SLUSH、WEBSUMMIT参加<br>グローバルパートナーシップ構築'
+                },
+                services: {
+                    title: '多様な産業分野別ソリューション',
+                    s1Title: '不動産データ統合',
+                    s1List: ['全国不動産データ標準化・統合', '機械学習基盤95%以上の精度', '詐欺リアルタイム検知・通知', 'HUGと11個の主要銀行API提供'],
+                    s2Title: '放送システム構築',
+                    s2List: ['CJ ENM放送送出システム', 'CNTV中国VOD管理システム', 'ch.China CMS開発及び運営', 'リアルタイムストリーミングプラットフォーム開発'],
+                    s3Title: '多言語教育プラットフォーム',
+                    s3List: ['AI基盤リモートトーク教室システム', '200カ国言語リアルタイム翻訳', '画像教育統合プラットフォーム', '学習データ分析及びレポート']
+                },
+                partners: {
+                    title: 'グローバルパートナーシップ',
+                    subtitle: 'グローバルエキスポ参加',
+                    korea: '韓国',
+                    japan: '日本',
+                    europe: 'ヨーロッパ',
+                    bmt: 'BMT進行中',
+                    discussion: '導入議論中',
+                    mwc: 'MWCバルセロナ',
+                    mwcDesc: '世界最大のモバイル展示会',
+                    slush: 'SLUSHヘルシンキ',
+                    slushDesc: 'ヨーロッパ最大のスタートアップカンファレンス',
+                    websummit: 'WEBSUMMITリスボン',
+                    websummitDesc: '世界最大のテックカンファレンス'
+                },
+                vision: {
+                    title: '未来ビジョン',
+                    description: '2025年日本とポルトガル進出を皮切りに、<br><strong>2028年までに年間売上800億ウォン達成を目標とします。</strong>',
+                    v1Title: '市場拡大',
+                    v1Desc: '日本、欧州、米国市場進出',
+                    v2Title: 'AI技術融合',
+                    v2Desc: 'AI基盤マーケティング分析サービス',
+                    v3Title: 'インフラ拡充',
+                    v3Desc: 'クラウド基盤グローバルインフラ',
+                    v4Title: 'セキュリティ強化',
+                    v4Desc: '個人情報保護技術高度化'
+                },
+                news: {
+                    title: '会社ニュース',
+                    subtitle: 'TEAMPLAYERの最新ニュースと活動'
+                },
+                contact: {
+                    title: '今すぐTEAMPLAYERと<br>一緒に始めましょう',
+                    subtitle: '革新的なIT技術でビジネスの新たな可能性を開きます',
+                    downloadProfile: '会社紹介書ダウンロード',
+                    consultation: '相談申し込み'
+                },
+                footer: {
+                    tagline: '(株)チームプレーヤー - 楽しいIT技術を創造します',
+                    copyright: '© 2024 TEAMPLAYER Inc. All rights reserved.',
+                    ceoInfo: '代表取締役: キム・ウォンチョル | 設立: 2016年11月1日',
+                    address: '京畿道龍仁市器興区東柏路22',
+                    company: '(株)チームプレーヤー',
+                    business: '事業者登録番号',
+                    businessNum: '409-87-00646',
+                    ceo: '代表',
+                    ceoName: 'キム・ウォンチョル',
+                    tel: '電話',
+                    telNum: '02-6959-4050',
+                    email: 'メール',
+                    emailAddr: 'teamplayer@teamplayer.co.kr',
+                    addressDetail: 'ソウル特別市衿川区カサンデジタル2路108、305号'
+                }
+            }
+        };
+
+        let currentLang = 'ko';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const trans = translations[lang];
+
+            console.log('Switching to language:', lang);
+
+            // Update navigation
+            try {
+                document.querySelectorAll('.nav-menu li').forEach((li, index) => {
+                    const links = ['about', 'imsms', 'services', 'partners', 'vision', 'news', 'contact'];
+                    if (links[index] && li.querySelector('a')) {
+                        li.querySelector('a').textContent = trans.nav[links[index]];
+                    }
+                });
+            } catch (e) {
+                console.error('Error updating navigation:', e);
+            }
+
+            // Update hero section
+            try {
+                const badge = document.querySelector('.hero-badge span');
+                if (badge) badge.textContent = trans.hero.badge;
+
+                const heroTitle = document.querySelector('.hero-title');
+                if (heroTitle) {
+                    heroTitle.innerHTML = `
+                        <span class="gradient-text">${trans.hero.title1}</span><br>
+                        <span class="gradient-text-secondary">${trans.hero.title2}</span>
+                    `;
+                }
+
+                const heroDesc = document.querySelector('.hero-description');
+                if (heroDesc) heroDesc.innerHTML = trans.hero.description;
+
+                const heroBtn = document.querySelector('.hero-buttons a');
+                if (heroBtn) heroBtn.textContent = trans.hero.cta;
+            } catch (e) {
+                console.error('Error updating hero section:', e);
+            }
+
+            // Update about section
+            try {
+                const aboutTitle = document.querySelector('#about .section-title');
+                if (aboutTitle) aboutTitle.innerHTML = `<span class="gradient-text">TEAMPLAYER</span> ${trans.about.title.replace('TEAMPLAYER', '').trim()}`;
+
+                const aboutSub = document.querySelector('#about .section-subtitle');
+                if (aboutSub) aboutSub.textContent = trans.about.subtitle;
+
+                // Update company overview card
+                const overviewCard = document.querySelector('#about .glass-card');
+                if (overviewCard) {
+                    const h3 = overviewCard.querySelector('h3');
+                    if (h3) h3.textContent = trans.about.overview;
+
+                    const listItems = overviewCard.querySelectorAll('.list-item');
+                    if (listItems[0]) {
+                        const label0 = listItems[0].querySelector('.label');
+                        const value0 = listItems[0].querySelector('.value');
+                        if (label0) label0.textContent = trans.about.ceo;
+                        if (value0) value0.textContent = trans.about.ceoName;
+                    }
+                    if (listItems[1]) {
+                        const label1 = listItems[1].querySelector('.label');
+                        const value1 = listItems[1].querySelector('.value');
+                        if (label1) label1.textContent = trans.about.founded;
+                        if (value1) value1.textContent = trans.about.foundedDate;
+                    }
+                    if (listItems[2]) {
+                        const label2 = listItems[2].querySelector('.label');
+                        const value2 = listItems[2].querySelector('.value');
+                        if (label2) label2.textContent = trans.about.employees;
+                        if (value2) value2.textContent = trans.about.employeesCount;
+                    }
+                    if (listItems[3]) {
+                        const label3 = listItems[3].querySelector('.label');
+                        const value3 = listItems[3].querySelector('.value');
+                        if (label3) label3.textContent = trans.about.location;
+                        if (value3) value3.textContent = trans.about.locationDetail;
+                    }
+                }
+
+                // Update business card
+                const businessCard = document.querySelectorAll('#about .glass-card')[1];
+                if (businessCard) {
+                    const h3 = businessCard.querySelector('h3');
+                    if (h3) h3.textContent = trans.about.business;
+                    const p = businessCard.querySelector('p');
+                    if (p) p.textContent = trans.about.businessDetail;
+                    const listItem = businessCard.querySelectorAll('.list-item')[0];
+                    if (listItem) {
+                        const label = listItem.querySelector('.label');
+                        const value = listItem.querySelector('.value');
+                        if (label) label.textContent = trans.about.revenue;
+                        if (value) value.textContent = trans.about.revenueDetail;
+                    }
+                }
+
+                // Update tech card
+                const techCard = document.querySelectorAll('#about .glass-card')[2];
+                if (techCard) {
+                    const h3 = techCard.querySelector('h3');
+                    if (h3) h3.textContent = trans.about.tech;
+                    const techList = techCard.querySelectorAll('.tech-list li');
+                    trans.about.techList.forEach((tech, i) => {
+                        if (techList[i]) techList[i].textContent = tech;
+                    });
+                }
+            } catch (e) {
+                console.error('Error updating about section:', e);
+            }
+
+            // Update IMSMS section
+            try {
+                const featTitle = document.querySelector('#features .section-title');
+                if (featTitle) featTitle.textContent = trans.imsms.title;
+                const featSub = document.querySelector('#features .section-subtitle');
+                if (featSub) featSub.textContent = trans.imsms.subtitle;
+
+                const featureCards = document.querySelectorAll('#features .glass-card');
+                if (featureCards[0]) {
+                    const h3 = featureCards[0].querySelector('h3');
+                    const p = featureCards[0].querySelector('p');
+                    if (h3) h3.textContent = trans.imsms.tech1;
+                    if (p) p.textContent = trans.imsms.tech1Desc;
+                }
+                if (featureCards[1]) {
+                    const h3 = featureCards[1].querySelector('h3');
+                    const p = featureCards[1].querySelector('p');
+                    if (h3) h3.textContent = trans.imsms.tech2;
+                    if (p) p.textContent = trans.imsms.tech2Desc;
+                }
+                if (featureCards[2]) {
+                    const h3 = featureCards[2].querySelector('h3');
+                    const p = featureCards[2].querySelector('p');
+                    if (h3) h3.textContent = trans.imsms.tech3;
+                    if (p) p.textContent = trans.imsms.tech3Desc;
+                }
+            } catch (e) {
+                console.error('Error updating IMSMS section:', e);
+            }
+
+            // Update history section
+            try {
+                const histTitle = document.querySelector('#history .section-title');
+                if (histTitle) {
+                    histTitle.innerHTML = `
+                        <span class="gradient-text">TEAMPLAYER</span><span class="nobr">${trans.history.title.replace('TEAMPLAYER', '')}</span>
+                    `;
+                }
+
+                const timelineItems = document.querySelectorAll('.timeline-item');
+                const historyYears = ['2016', '2017', '2018', '2020', '2022', '2023', '2024'];
+                historyYears.forEach((year, i) => {
+                    if (timelineItems[i]) {
+                        const card = timelineItems[i].querySelector('.timeline-card-glass');
+                        if (card) {
+                            const h4 = card.querySelector('h4');
+                            const p = card.querySelector('p');
+                            if (h4) h4.textContent = trans.history[`y${year}`];
+                            if (p) p.innerHTML = trans.history[`y${year}Desc`];
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error('Error updating history section:', e);
+            }
+
+            // Update services section
+            try {
+                const servTitle = document.querySelector('#services .section-title');
+                if (servTitle) servTitle.textContent = trans.services.title;
+
+                const serviceCards = document.querySelectorAll('.service-card-glass');
+                ['s1', 's2', 's3'].forEach((s, i) => {
+                    if (serviceCards[i]) {
+                        const h3 = serviceCards[i].querySelector('h3');
+                        if (h3) h3.textContent = trans.services[`${s}Title`];
+
+                        const listItems = serviceCards[i].querySelectorAll('.service-list li');
+                        const serviceList = trans.services[`${s}List`];
+                        if (serviceList && listItems) {
+                            serviceList.forEach((item, idx) => {
+                                if (listItems[idx]) {
+                                    listItems[idx].textContent = item;
+                                }
+                            });
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error('Error updating services section:', e);
+            }
+
+            // Update partners section
+            try {
+                const partTitle = document.querySelector('#partners .section-title');
+                if (partTitle) partTitle.innerHTML = `<span class="gradient-text">${trans.partners.title}</span>`;
+
+                const partSubtitle = document.querySelector('.partners-subtitle');
+                if (partSubtitle) partSubtitle.textContent = trans.partners.subtitle;
+
+                const partnerCards = document.querySelectorAll('.partner-card');
+                if (partnerCards[0]) {
+                    const span = partnerCards[0].querySelector('span');
+                    if (span) span.textContent = trans.partners.korea;
+                }
+                if (partnerCards[1]) {
+                    const span = partnerCards[1].querySelector('span');
+                    if (span) span.textContent = trans.partners.japan;
+                }
+                if (partnerCards[2]) {
+                    const span = partnerCards[2].querySelector('span');
+                    if (span) span.textContent = trans.partners.europe;
+                }
+
+                document.querySelectorAll('.badge-success').forEach(badge => {
+                    badge.textContent = trans.partners.discussion;
+                });
+                const badgeInfo = document.querySelector('.badge-info');
+                if (badgeInfo) badgeInfo.textContent = trans.partners.bmt;
+
+                // Update expo cards
+                const expoCards = document.querySelectorAll('.expo-card-glass');
+                if (expoCards[0]) {
+                    const h4 = expoCards[0].querySelector('h4');
+                    const p = expoCards[0].querySelector('p');
+                    if (h4) h4.textContent = trans.partners.mwc;
+                    if (p) p.textContent = trans.partners.mwcDesc;
+                }
+                if (expoCards[1]) {
+                    const h4 = expoCards[1].querySelector('h4');
+                    const p = expoCards[1].querySelector('p');
+                    if (h4) h4.textContent = trans.partners.slush;
+                    if (p) p.textContent = trans.partners.slushDesc;
+                }
+                if (expoCards[2]) {
+                    const h4 = expoCards[2].querySelector('h4');
+                    const p = expoCards[2].querySelector('p');
+                    if (h4) h4.textContent = trans.partners.websummit;
+                    if (p) p.textContent = trans.partners.websummitDesc;
+                }
+            } catch (e) {
+                console.error('Error updating partners section:', e);
+            }
+
+            // Update vision section
+            try {
+                const visTitle = document.querySelector('#vision .section-title');
+                if (visTitle) visTitle.textContent = trans.vision.title;
+
+                const visDesc = document.querySelector('.vision-description');
+                if (visDesc) visDesc.innerHTML = trans.vision.description;
+
+                const visionCards = document.querySelectorAll('.vision-card-glass');
+                if (visionCards[0]) {
+                    const h4 = visionCards[0].querySelector('h4');
+                    const p = visionCards[0].querySelector('p');
+                    if (h4) h4.textContent = trans.vision.v1Title;
+                    if (p) p.textContent = trans.vision.v1Desc;
+                }
+                if (visionCards[1]) {
+                    const h4 = visionCards[1].querySelector('h4');
+                    const p = visionCards[1].querySelector('p');
+                    if (h4) h4.textContent = trans.vision.v2Title;
+                    if (p) p.textContent = trans.vision.v2Desc;
+                }
+                if (visionCards[2]) {
+                    const h4 = visionCards[2].querySelector('h4');
+                    const p = visionCards[2].querySelector('p');
+                    if (h4) h4.textContent = trans.vision.v3Title;
+                    if (p) p.textContent = trans.vision.v3Desc;
+                }
+                if (visionCards[3]) {
+                    const h4 = visionCards[3].querySelector('h4');
+                    const p = visionCards[3].querySelector('p');
+                    if (h4) h4.textContent = trans.vision.v4Title;
+                    if (p) p.textContent = trans.vision.v4Desc;
+                }
+            } catch (e) {
+                console.error('Error updating vision section:', e);
+            }
+
+            // Update news section
+            try {
+                const newsTitle = document.querySelector('#news .section-title');
+                if (newsTitle) newsTitle.textContent = trans.news.title;
+                const newsSub = document.querySelector('#news .section-subtitle');
+                if (newsSub) newsSub.textContent = trans.news.subtitle;
+
+                // Reload news with new language
+                loadNews();
+            } catch (e) {
+                console.error('Error updating news section:', e);
+            }
+
+            // Update contact section
+            try {
+                const ctaTitle = document.querySelector('.cta-title');
+                if (ctaTitle) ctaTitle.innerHTML = trans.contact.title.replace('TEAMPLAYER', '<span class="gradient-text">TEAMPLAYER</span>');
+
+                const ctaDesc = document.querySelector('.cta-description');
+                if (ctaDesc) ctaDesc.textContent = trans.contact.subtitle;
+
+                const ctaBtn1 = document.querySelectorAll('.cta-buttons a')[0];
+                if (ctaBtn1) {
+                    ctaBtn1.innerHTML = `
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        ${trans.contact.downloadProfile}
+                    `;
+                }
+
+                const ctaBtn2 = document.querySelector('.btn-cta-secondary');
+                if (ctaBtn2) ctaBtn2.textContent = trans.contact.consultation;
+            } catch (e) {
+                console.error('Error updating contact section:', e);
+            }
+
+            // Update footer
+            try {
+                const footerTagline = document.getElementById('footer-tagline');
+                if (footerTagline) footerTagline.textContent = trans.footer.tagline;
+
+                const footerCopyright = document.getElementById('footer-copyright');
+                if (footerCopyright) footerCopyright.textContent = trans.footer.copyright;
+
+                const footerCeo = document.getElementById('footer-ceo');
+                if (footerCeo) footerCeo.textContent = trans.footer.ceoInfo;
+
+                const footerAddress = document.getElementById('footer-address');
+                if (footerAddress) footerAddress.textContent = trans.footer.address;
+
+                // Also check for old footer structure if it exists
+                const footerItems = document.querySelectorAll('.footer-info-item');
+                if (footerItems.length > 0) {
+                    if (footerItems[0]) {
+                        const label = footerItems[0].querySelector('.footer-label');
+                        if (label) label.textContent = trans.footer.company;
+                    }
+                    if (footerItems[1]) {
+                        const label = footerItems[1].querySelector('.footer-label');
+                        const value = footerItems[1].querySelector('.footer-value');
+                        if (label) label.textContent = trans.footer.business;
+                        if (value) value.textContent = trans.footer.businessNum;
+                    }
+                    if (footerItems[2]) {
+                        const label = footerItems[2].querySelector('.footer-label');
+                        const value = footerItems[2].querySelector('.footer-value');
+                        if (label) label.textContent = trans.footer.ceo;
+                        if (value) value.textContent = trans.footer.ceoName;
+                    }
+                }
+
+                const copyright = document.querySelector('.footer-bottom p');
+                if (copyright) copyright.textContent = trans.footer.copyright;
+            } catch (e) {
+                console.error('Error updating footer:', e);
+            }
+        }
+
+        // 언어 선택
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const langMap = {'한': 'ko', 'EN': 'en', 'あ': 'ja'};
+                const lang = langMap[this.textContent];
+                if (lang) switchLanguage(lang);
+            });
+        });
+
+        // Mobile language selector
+        document.querySelectorAll('.mobile-lang-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.mobile-lang-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const langMap = {'한국어': 'ko', 'English': 'en', '日本語': 'ja'};
+                const lang = langMap[this.textContent];
+                if (lang) switchLanguage(lang);
+            });
+        });
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // News translations
+        const newsTranslations = {
+            ko: {
+                items: [
+                    {
+                        title: "MWC 2024 바르셀로나 참가",
+                        category: "전시회",
+                        description: "세계 최대 모바일 전시회 MWC 2024에 참가하여 IMSMS 솔루션을 선보였습니다. 글로벌 통신사들과 활발한 미팅을 진행했습니다."
+                    },
+                    {
+                        title: "SLUSH 2024 헬싱키 참가",
+                        category: "전시회",
+                        description: "유럽 최대 스타트업 컨퍼런스 SLUSH 2024에서 혁신적인 메시징 기술을 발표했습니다."
+                    },
+                    {
+                        title: "IMSMS 정식 출시",
+                        category: "제품출시",
+                        description: "2년간의 개발을 거쳐 IMSMS 솔루션을 정식 출시했습니다. 기업 메시징의 새로운 패러다임을 제시합니다."
+                    },
+                    {
+                        title: "일본 IT WEEK 2024 도쿄",
+                        category: "전시회",
+                        description: "일본 최대 IT 전시회에 참가하여 일본 시장 진출을 위한 파트너십을 구축했습니다."
+                    },
+                    {
+                        title: "특허 등록 완료",
+                        category: "기술",
+                        description: "아이폰 메시지 대량 발송 관련 핵심 기술 특허를 취득했습니다."
+                    },
+                    {
+                        title: "WEBSUMMIT 2024 리스본",
+                        category: "전시회",
+                        description: "세계 최대 테크 컨퍼런스 WEBSUMMIT에서 글로벌 투자자들과 미팅을 진행했습니다."
+                    }
+                ],
+                error: "뉴스를 불러오는데 실패했습니다."
+            },
+            en: {
+                items: [
+                    {
+                        title: "MWC 2024 Barcelona",
+                        category: "Exhibition",
+                        description: "Showcased IMSMS solution at MWC 2024, the world's largest mobile exhibition. Conducted active meetings with global carriers."
+                    },
+                    {
+                        title: "SLUSH 2024 Helsinki",
+                        category: "Exhibition",
+                        description: "Presented innovative messaging technology at SLUSH 2024, Europe's largest startup conference."
+                    },
+                    {
+                        title: "IMSMS Official Launch",
+                        category: "Product Launch",
+                        description: "After 2 years of development, officially launched IMSMS solution. Presenting a new paradigm in enterprise messaging."
+                    },
+                    {
+                        title: "Japan IT WEEK 2024 Tokyo",
+                        category: "Exhibition",
+                        description: "Participated in Japan's largest IT exhibition to build partnerships for Japanese market entry."
+                    },
+                    {
+                        title: "Patent Registration Complete",
+                        category: "Technology",
+                        description: "Acquired core technology patents related to iPhone message bulk sending."
+                    },
+                    {
+                        title: "WEBSUMMIT 2024 Lisbon",
+                        category: "Exhibition",
+                        description: "Conducted meetings with global investors at WEBSUMMIT, the world's largest tech conference."
+                    }
+                ],
+                error: "Failed to load news."
+            },
+            ja: {
+                items: [
+                    {
+                        title: "MWC 2024 バルセロナ参加",
+                        category: "展示会",
+                        description: "世界最大のモバイル展示会MWC 2024でIMSMSソリューションを披露。グローバル通信事業者と活発なミーティングを実施。"
+                    },
+                    {
+                        title: "SLUSH 2024 ヘルシンキ参加",
+                        category: "展示会",
+                        description: "ヨーロッパ最大のスタートアップカンファレンスSLUSH 2024で革新的なメッセージング技術を発表。"
+                    },
+                    {
+                        title: "IMSMS正式リリース",
+                        category: "製品リリース",
+                        description: "2年間の開発を経てIMSMSソリューションを正式リリース。企業メッセージングの新しいパラダイムを提示。"
+                    },
+                    {
+                        title: "日本IT WEEK 2024東京",
+                        category: "展示会",
+                        description: "日本最大のIT展示会に参加し、日本市場進出のためのパートナーシップを構築。"
+                    },
+                    {
+                        title: "特許登録完了",
+                        category: "技術",
+                        description: "iPhoneメッセージ大量送信関連のコア技術特許を取得。"
+                    },
+                    {
+                        title: "WEBSUMMIT 2024 リスボン",
+                        category: "展示会",
+                        description: "世界最大のテックカンファレンスWEBSUMMITでグローバル投資家とミーティングを実施。"
+                    }
+                ],
+                error: "ニュースの読み込みに失敗しました。"
+            }
+        };
+
+        // Load news data
+        async function loadNews() {
+            try {
+                const response = await fetch('/news-data.json');
+                const data = await response.json();
+                const newsGrid = document.getElementById('newsGrid');
+
+                // Get translations for current language
+                const langNews = newsTranslations[currentLang] || newsTranslations.ko;
+
+                // Show only first 6 news items
+                const newsItems = data.news.slice(0, 6);
+
+                newsGrid.innerHTML = newsItems.map((item, index) => {
+                    const translatedItem = langNews.items[index] || {};
+                    return `
+                        <article class="news-card" onclick="window.open('${item.image}', '_blank')">
+                            <img src="${item.thumbnail}" alt="${translatedItem.title || item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/667eea/ffffff?text=${encodeURIComponent(translatedItem.title || item.title)}'">
+                            <div class="news-content">
+                                <span class="news-category">${translatedItem.category || item.category}</span>
+                                <h3 class="news-title">${translatedItem.title || item.title}</h3>
+                                <p class="news-date">${formatDate(item.date)}</p>
+                                <p class="news-description">${translatedItem.description || item.description}</p>
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading news:', error);
+                const langNews = newsTranslations[currentLang] || newsTranslations.ko;
+                document.getElementById('newsGrid').innerHTML = `<p>${langNews.error}</p>`;
+            }
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const locale = currentLang === 'en' ? 'en-US' : currentLang === 'ja' ? 'ja-JP' : 'ko-KR';
+            return date.toLocaleDateString(locale, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Load news when page loads
+        document.addEventListener('DOMContentLoaded', loadNews);
+    </script>
+</body>
+</html>

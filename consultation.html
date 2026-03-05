@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상담 요청 - TEAMPLAYER</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .phone-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .phone-group select {
+            flex: 0 0 100px;
+        }
+
+        .phone-group input {
+            flex: 1;
+        }
+
+        .privacy-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .privacy-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .privacy-content {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-cancel {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background: #d0d0d0;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Honeypot field - hidden from users */
+        .honey {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            visibility: hidden;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .phone-group {
+                flex-direction: column;
+            }
+
+            .phone-group select {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/teamplayer-logo.png" alt="TEAMPLAYER" class="logo">
+            <h1>상담 요청</h1>
+            <p class="subtitle">전문 상담원이 빠르게 연락드리겠습니다</p>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            ✅ 상담 요청이 성공적으로 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.
+        </div>
+
+        <form id="consultationForm" novalidate>
+            <!-- Honeypot field for spam protection -->
+            <input type="text" name="website" class="honey" tabindex="-1" autocomplete="off">
+
+            <div class="form-group">
+                <label for="companyName">
+                    회사명 <span class="required">*</span>
+                </label>
+                <input type="text" id="companyName" name="companyName" required>
+                <div class="error" id="companyNameError">회사명을 입력해주세요.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="contactName">
+                    담당자명 <span class="required">*</span>
+                </label>
+                <input type="text" id="contactName" name="contactName" required>
+                <div class="error" id="contactNameError">담당자명을 입력해주세요.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">
+                    연락처 <span class="required">*</span>
+                </label>
+                <div class="phone-group">
+                    <select id="phonePrefix" name="phonePrefix">
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="016">016</option>
+                        <option value="017">017</option>
+                        <option value="018">018</option>
+                        <option value="019">019</option>
+                        <option value="02">02</option>
+                        <option value="031">031</option>
+                        <option value="032">032</option>
+                        <option value="033">033</option>
+                        <option value="041">041</option>
+                        <option value="042">042</option>
+                        <option value="043">043</option>
+                        <option value="044">044</option>
+                        <option value="051">051</option>
+                        <option value="052">052</option>
+                        <option value="053">053</option>
+                        <option value="054">054</option>
+                        <option value="055">055</option>
+                        <option value="061">061</option>
+                        <option value="062">062</option>
+                        <option value="063">063</option>
+                        <option value="064">064</option>
+                        <option value="070">070</option>
+                    </select>
+                    <input type="tel" id="phone" name="phone" placeholder="1234-5678" pattern="[0-9]{3,4}-[0-9]{4}" required>
+                </div>
+                <div class="error" id="phoneError">올바른 전화번호를 입력해주세요. (예: 1234-5678)</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">
+                    이메일 <span class="required">*</span>
+                </label>
+                <input type="email" id="email" name="email" placeholder="example@company.com" required>
+                <div class="error" id="emailError">올바른 이메일 주소를 입력해주세요.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="consultationType">
+                    상담 유형 <span class="required">*</span>
+                </label>
+                <select id="consultationType" name="consultationType" required>
+                    <option value="">선택해주세요</option>
+                    <option value="imsms">IMSMS 도입 문의</option>
+                    <option value="partnership">파트너십 제안</option>
+                    <option value="technical">기술 지원</option>
+                    <option value="pricing">가격 문의</option>
+                    <option value="other">기타</option>
+                </select>
+                <div class="error" id="consultationTypeError">상담 유형을 선택해주세요.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">
+                    상담 내용 <span class="required">*</span>
+                </label>
+                <textarea id="message" name="message" placeholder="상담 내용을 자세히 입력해주세요." required></textarea>
+                <div class="error" id="messageError">상담 내용을 입력해주세요.</div>
+            </div>
+
+            <div class="privacy-section">
+                <div class="privacy-title">개인정보 수집 및 이용 동의</div>
+                <div class="privacy-content">
+                    <strong>1. 수집 항목</strong><br>
+                    - 필수항목: 회사명, 담당자명, 연락처, 이메일, 상담내용<br><br>
+
+                    <strong>2. 수집 및 이용목적</strong><br>
+                    - 서비스 상담 및 문의사항 답변<br>
+                    - 마케팅 및 광고에 활용<br><br>
+
+                    <strong>3. 보유 및 이용기간</strong><br>
+                    - 상담 완료 후 3년간 보관<br>
+                    - 관계법령에 따라 보존이 필요한 경우 해당 기간동안 보관<br><br>
+
+                    <strong>4. 동의 거부 권리</strong><br>
+                    - 개인정보 수집 및 이용에 대한 동의를 거부할 수 있으며, 동의를 거부할 경우 상담 서비스 이용이 제한됩니다.
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="privacyAgree" name="privacyAgree" required>
+                    <label for="privacyAgree">개인정보 수집 및 이용에 동의합니다. <span class="required">*</span></label>
+                </div>
+                <div class="error" id="privacyAgreeError">개인정보 수집 및 이용에 동의해주세요.</div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn-cancel" onclick="window.history.back()">취소</button>
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span id="submitText">상담 요청하기</span>
+                    <span id="submitLoading" class="loading" style="display: none;"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('consultationForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        const submitLoading = document.getElementById('submitLoading');
+        const successMessage = document.getElementById('successMessage');
+
+        // Formspree 엔드포인트 (GitHub Pages 호환 - 서버 불필요)
+        const FORMSPREE_URL = 'https://formspree.io/f/xpwrrwpj';
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Reset errors
+            document.querySelectorAll('.error').forEach(error => {
+                error.classList.remove('show');
+            });
+
+            // Validate form
+            let isValid = true;
+
+            // Company name validation
+            const companyName = document.getElementById('companyName');
+            if (!companyName.value.trim()) {
+                document.getElementById('companyNameError').classList.add('show');
+                isValid = false;
+            }
+
+            // Contact name validation
+            const contactName = document.getElementById('contactName');
+            if (!contactName.value.trim()) {
+                document.getElementById('contactNameError').classList.add('show');
+                isValid = false;
+            }
+
+            // Phone validation
+            const phone = document.getElementById('phone');
+            const phonePattern = /^\d{3,4}-\d{4}$/;
+            if (!phonePattern.test(phone.value)) {
+                document.getElementById('phoneError').classList.add('show');
+                isValid = false;
+            }
+
+            // Email validation
+            const email = document.getElementById('email');
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email.value)) {
+                document.getElementById('emailError').classList.add('show');
+                isValid = false;
+            }
+
+            // Consultation type validation
+            const consultationType = document.getElementById('consultationType');
+            if (!consultationType.value) {
+                document.getElementById('consultationTypeError').classList.add('show');
+                isValid = false;
+            }
+
+            // Message validation
+            const message = document.getElementById('message');
+            if (!message.value.trim() || message.value.trim().length < 10) {
+                document.getElementById('messageError').textContent = '상담 내용을 10자 이상 입력해주세요.';
+                document.getElementById('messageError').classList.add('show');
+                isValid = false;
+            }
+
+            // Privacy agreement validation
+            const privacyAgree = document.getElementById('privacyAgree');
+            if (!privacyAgree.checked) {
+                document.getElementById('privacyAgreeError').classList.add('show');
+                isValid = false;
+            }
+
+            // Check honeypot (spam protection)
+            const honeypot = document.querySelector('input[name="website"]');
+            if (honeypot.value) {
+                return;
+            }
+
+            if (!isValid) {
+                return;
+            }
+
+            // Prepare data
+            const phonePrefix = document.getElementById('phonePrefix').value;
+            const fullPhone = `${phonePrefix}-${phone.value}`;
+
+            const consultationTypes = {
+                'imsms': 'IMSMS 도입 문의',
+                'partnership': '파트너십 제안',
+                'technical': '기술 지원',
+                'pricing': '가격 문의',
+                'other': '기타'
+            };
+
+            const formData = new FormData();
+            formData.append('_subject', `[상담 요청] ${companyName.value.trim()} - ${contactName.value.trim()}`);
+            formData.append('회사명', companyName.value.trim());
+            formData.append('담당자명', contactName.value.trim());
+            formData.append('연락처', fullPhone);
+            formData.append('email', email.value.trim());
+            formData.append('상담유형', consultationTypes[consultationType.value] || consultationType.value);
+            formData.append('상담내용', message.value.trim());
+            formData.append('_replyto', email.value.trim());
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.style.display = 'none';
+            submitLoading.style.display = 'inline-block';
+
+            try {
+                const response = await fetch(FORMSPREE_URL, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    successMessage.classList.add('show');
+                    form.reset();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    setTimeout(() => {
+                        form.style.display = 'none';
+                    }, 1000);
+
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 3000);
+                } else {
+                    throw new Error('전송 실패');
+                }
+            } catch (error) {
+                alert('상담 요청 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.\n\n긴급한 경우 1522-8061로 직접 연락주시기 바랍니다.');
+            } finally {
+                submitBtn.disabled = false;
+                submitText.style.display = 'inline';
+                submitLoading.style.display = 'none';
+            }
+        });
+
+        // Auto-format phone number
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^\d]/g, '');
+            if (value.length > 4) {
+                if (value.length <= 7) {
+                    value = value.slice(0, 3) + '-' + value.slice(3);
+                } else {
+                    value = value.slice(0, 4) + '-' + value.slice(4, 8);
+                }
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
