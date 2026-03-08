@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상담 요청 완료 - TEAMPLAYER</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .check-icon {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 30px;
+        }
+        .check-icon svg { width: 40px; height: 40px; }
+        h1 { color: #333; font-size: 24px; margin-bottom: 15px; }
+        p { color: #666; line-height: 1.8; margin-bottom: 10px; }
+        .contact-info { margin: 25px 0; padding: 20px; background: #f8f9fa; border-radius: 10px; }
+        .contact-info a { color: #667eea; text-decoration: none; font-weight: 600; }
+        .btn-home {
+            display: inline-block; margin-top: 20px; padding: 14px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border-radius: 8px; text-decoration: none; font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn-home:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="check-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+        <h1>상담 요청이 접수되었습니다</h1>
+        <p>빠른 시일 내에 담당자가 연락드리겠습니다.</p>
+        <div class="contact-info">
+            <p>긴급 문의: <a href="tel:1522-8061">1522-8061</a></p>
+            <p>이메일: <a href="mailto:charles@teamplayer.co.kr">charles@teamplayer.co.kr</a></p>
+        </div>
+        <a href="/" class="btn-home">홈으로 돌아가기</a>
+    </div>
+</body>
+</html>
