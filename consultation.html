@@ -288,6 +288,18 @@
                     연락처 <span class="required">*</span>
                 </label>
                 <div class="phone-group">
+                    <select id="countryCode" name="countryCode" style="flex: 0 0 90px;">
+                        <option value="+82">+82</option>
+                        <option value="+1">+1</option>
+                        <option value="+81">+81</option>
+                        <option value="+86">+86</option>
+                        <option value="+44">+44</option>
+                        <option value="+49">+49</option>
+                        <option value="+33">+33</option>
+                        <option value="+61">+61</option>
+                        <option value="+65">+65</option>
+                        <option value="+852">+852</option>
+                    </select>
                     <select id="phonePrefix" name="phonePrefix">
                         <option value="010">010</option>
                         <option value="011">011</option>
@@ -391,8 +403,8 @@
         const submitLoading = document.getElementById('submitLoading');
         const successMessage = document.getElementById('successMessage');
 
-        // Formspree 엔드포인트 (GitHub Pages 호환 - 서버 불필요)
-        const FORMSPREE_URL = 'https://formspree.io/f/xpwrrwpj';
+        // Formsubmit.co (가입 불필요, charles@teamplayer.co.kr로 전달)
+        const FORM_URL = 'https://formsubmit.co/ajax/charles@teamplayer.co.kr';
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -468,8 +480,9 @@
             }
 
             // Prepare data
+            const countryCode = document.getElementById('countryCode').value;
             const phonePrefix = document.getElementById('phonePrefix').value;
-            const fullPhone = `${phonePrefix}-${phone.value}`;
+            const fullPhone = `${countryCode} ${phonePrefix}-${phone.value}`;
 
             const consultationTypes = {
                 'imsms': 'IMSMS 도입 문의',
@@ -479,15 +492,18 @@
                 'other': '기타'
             };
 
-            const formData = new FormData();
-            formData.append('_subject', `[상담 요청] ${companyName.value.trim()} - ${contactName.value.trim()}`);
-            formData.append('회사명', companyName.value.trim());
-            formData.append('담당자명', contactName.value.trim());
-            formData.append('연락처', fullPhone);
-            formData.append('email', email.value.trim());
-            formData.append('상담유형', consultationTypes[consultationType.value] || consultationType.value);
-            formData.append('상담내용', message.value.trim());
-            formData.append('_replyto', email.value.trim());
+            const formPayload = {
+                _subject: `[상담 요청] ${companyName.value.trim()} - ${contactName.value.trim()}`,
+                _replyto: email.value.trim(),
+                _captcha: 'false',
+                _template: 'table',
+                '회사명': companyName.value.trim(),
+                '담당자명': contactName.value.trim(),
+                '연락처': fullPhone,
+                'email': email.value.trim(),
+                '상담유형': consultationTypes[consultationType.value] || consultationType.value,
+                '상담내용': message.value.trim()
+            };
 
             // Show loading state
             submitBtn.disabled = true;
@@ -495,10 +511,10 @@
             submitLoading.style.display = 'inline-block';
 
             try {
-                const response = await fetch(FORMSPREE_URL, {
+                const response = await fetch(FORM_URL, {
                     method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
+                    body: JSON.stringify(formPayload),
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
                 });
 
                 if (response.ok) {
