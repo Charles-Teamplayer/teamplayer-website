@@ -254,10 +254,12 @@
                 successMessage.classList.add('show');
                 form.style.display = 'none';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(function(){ window.location.href = '/#contact'; }, 3000);
             } catch (err) {
                 successMessage.classList.add('show');
                 form.style.display = 'none';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(function(){ window.location.href = '/#contact'; }, 3000);
             } finally {
                 submitBtn.disabled = false;
                 submitText.style.display = 'inline';
