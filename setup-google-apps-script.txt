@@ -1,0 +1,72 @@
+============================================
+  Google Apps Script 설정 가이드
+  (상담 폼 → 이메일 + 스프레드시트)
+============================================
+
+1. https://script.google.com 접속 (Google 계정 로그인)
+
+2. "새 프로젝트" 클릭
+
+3. 아래 코드를 전체 복사해서 붙여넣기:
+
+──────────────────────────────────────────
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+
+    // 1) 스프레드시트에 기록
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) {
+      ss = SpreadsheetApp.create('TeamPlayer 상담 요청');
+    }
+    var sheet = ss.getActiveSheet();
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(['접수일시', '회사명', '담당자', '연락처', '이메일', '상담유형', '상담내용']);
+    }
+    sheet.appendRow([
+      data.timestamp,
+      data.companyName,
+      data.contactName,
+      data.phone,
+      data.email,
+      data.consultationType,
+      data.message
+    ]);
+
+    // 2) 관리자에게 이메일 발송
+    var subject = '[상담 요청] ' + data.companyName + ' - ' + data.contactName;
+    var body = '새로운 상담 요청이 접수되었습니다.\n\n'
+      + '회사명: ' + data.companyName + '\n'
+      + '담당자: ' + data.contactName + '\n'
+      + '연락처: ' + data.phone + '\n'
+      + '이메일: ' + data.email + '\n'
+      + '상담유형: ' + data.consultationType + '\n'
+      + '상담내용: ' + data.message + '\n'
+      + '접수일시: ' + data.timestamp;
+
+    MailApp.sendEmail('charles@teamplayer.co.kr', subject, body);
+
+    return ContentService.createTextOutput(JSON.stringify({success: true}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({success: false, error: err.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+──────────────────────────────────────────
+
+4. 프로젝트 이름을 "TeamPlayer 상담폼"으로 변경
+
+5. "배포" → "새 배포" 클릭
+
+6. 유형: "웹 앱" 선택
+   - 설명: 상담 폼 API
+   - 실행 주체: "나"
+   - 액세스: "모든 사용자" (누구나)
+
+7. "배포" 클릭 → URL 복사
+
+8. 복사한 URL을 알려주세요!
+   (예: https://script.google.com/macros/s/AKfycbx.../exec)
+
+※ 이 URL을 consultation.html의 SCRIPT_URL에 넣으면 완료됩니다.
