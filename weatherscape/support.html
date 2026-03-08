@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherScape - Support / 고객지원</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #050505;
+            color: #e0e0e0;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .nav-brand svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+        }
+
+        /* Main */
+        main {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+        }
+
+        /* Hero */
+        .page-hero {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .page-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-hero .subtitle {
+            font-size: 16px;
+            color: #777;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 48px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            margin-bottom: 32px;
+        }
+
+        .glass-card h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        .glass-card h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: #ddd;
+            margin-bottom: 8px;
+        }
+
+        .glass-card p {
+            color: #bbb;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .glass-card a {
+            color: #6aa0ff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .glass-card a:hover {
+            color: #8db8ff;
+        }
+
+        .glass-card strong {
+            color: #ddd;
+        }
+
+        /* FAQ */
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 20px 0;
+        }
+
+        .faq-item:first-of-type {
+            padding-top: 0;
+        }
+
+        .faq-item:last-of-type {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            gap: 16px;
+        }
+
+        .faq-question h3 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+            color: #ddd;
+            flex: 1;
+        }
+
+        .faq-question .q-label {
+            color: #6aa0ff;
+            font-size: 13px;
+            font-weight: 600;
+            flex-shrink: 0;
+            width: 28px;
+        }
+
+        .faq-arrow {
+            width: 20px;
+            height: 20px;
+            color: #555;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-top: 12px;
+        }
+
+        .faq-answer p {
+            font-size: 14px;
+            color: #999;
+            padding-left: 44px;
+            margin-bottom: 0;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 28px;
+        }
+
+        .info-box h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6aa0ff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            text-align: center;
+            padding: 56px 48px;
+        }
+
+        .contact-cta h2 {
+            margin-bottom: 12px;
+        }
+
+        .contact-cta p {
+            color: #888;
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+
+        .contact-cta p:last-child {
+            margin-bottom: 0;
+        }
+
+        .email-btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 12px;
+            background: rgba(106, 160, 255, 0.12);
+            border: 1px solid rgba(106, 160, 255, 0.25);
+            color: #6aa0ff;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .email-btn:hover {
+            background: rgba(106, 160, 255, 0.2);
+            color: #8db8ff;
+        }
+
+        /* Steps */
+        .step-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: step;
+        }
+
+        .step-list li {
+            padding: 12px 0 12px 44px;
+            position: relative;
+            color: #bbb;
+            font-size: 14px;
+            counter-increment: step;
+        }
+
+        .step-list li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(106, 160, 255, 0.1);
+            color: #6aa0ff;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .code-inline {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', monospace;
+            font-size: 13px;
+            color: #ccc;
+        }
+
+        /* Section Label */
+        .section-label {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .label-bug { background: rgba(255, 100, 100, 0.1); color: #ff6464; }
+        .label-feature { background: rgba(100, 255, 160, 0.1); color: #64ffa0; }
+
+        /* Footer */
+        footer {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+            color: #555;
+            font-size: 13px;
+        }
+
+        footer a {
+            color: #777;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #aaa;
+        }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .page-hero h1 { font-size: 28px; }
+            .glass-card { padding: 28px 20px; border-radius: 16px; }
+            .glass-card h2 { font-size: 18px; }
+            .info-grid { grid-template-columns: 1fr; }
+            .nav-links { gap: 20px; }
+            .nav-links a { font-size: 13px; }
+            main { padding: 100px 16px 60px; }
+            .contact-cta { padding: 40px 20px; }
+            .faq-answer p { padding-left: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a class="nav-brand" href="/">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="14" r="13" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                <circle cx="14" cy="11" r="5" fill="#6aa0ff" opacity="0.8"/>
+                <path d="M6 20 Q14 14 22 20" stroke="#6aa0ff" stroke-width="1.5" fill="none" opacity="0.5"/>
+            </svg>
+            WeatherScape
+        </a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="privacy-policy.html">Privacy</a></li>
+            <li><a href="support.html" class="active">Support</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <div class="page-hero">
+        <h1>Support</h1>
+        <p class="subtitle">고객지원</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="glass-card">
+        <h2>FAQ</h2>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span class="q-label">Q1</span>
+                <h3>WeatherScape은 어떤 앱인가요?</h3>
+                <svg class="faq-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+            </div>
+            <div class="faq-answer">
+                <p>WeatherScape은 Apple TV용 스크린세이버 앱입니다. 현재 날씨에 맞는 고화질 영상, 배경음악, 명언을 자동으로 보여주어 TV를 아름다운 인테리어 요소로 만들어줍니다.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span class="q-label">Q2</span>
+                <h3>위치 권한은 왜 필요한가요?</h3>
+                <svg class="faq-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+            </div>
+            <div class="faq-answer">
+                <p>현재 위치의 실시간 날씨 정보를 가져오기 위해 필요합니다. 위치 데이터는 Apple WeatherKit API 호출에만 사용되며, 외부 서버로 전송하거나 저장하지 않습니다.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span class="q-label">Q3</span>
+                <h3>인터넷 연결이 필요한가요?</h3>
+                <svg class="faq-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+            </div>
+            <div class="faq-answer">
+                <p>네, 날씨 데이터 조회와 배경 영상 스트리밍을 위해 인터넷 연결이 필요합니다. Wi-Fi 연결을 권장합니다.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span class="q-label">Q4</span>
+                <h3>배경 영상이 로딩되지 않아요.</h3>
+                <svg class="faq-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+            </div>
+            <div class="faq-answer">
+                <p>네트워크 연결 상태를 확인해주세요. Apple TV를 재시작하거나, 설정 > 네트워크에서 Wi-Fi 연결을 다시 시도해보세요. 문제가 지속되면 앱을 삭제 후 재설치해주세요.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span class="q-label">Q5</span>
+                <h3>날씨 정보가 정확하지 않아요.</h3>
+                <svg class="faq-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+            </div>
+            <div class="faq-answer">
+                <p>WeatherScape은 Apple WeatherKit 데이터를 사용합니다. 위치 권한이 올바르게 설정되어 있는지 확인해주세요. Apple TV 설정 > 개인정보 보호 > 위치 서비스에서 WeatherScape의 접근 권한을 확인할 수 있습니다.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span class="q-label">Q6</span>
+                <h3>배경음악을 끄거나 변경할 수 있나요?</h3>
+                <svg class="faq-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+            </div>
+            <div class="faq-answer">
+                <p>네, 앱 내 설정에서 배경음악을 켜고 끌 수 있으며, 볼륨 조절도 가능합니다. 날씨 분위기에 맞는 음악이 자동으로 선택됩니다.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span class="q-label">Q7</span>
+                <h3>명언(Quote) 표시를 끌 수 있나요?</h3>
+                <svg class="faq-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+            </div>
+            <div class="faq-answer">
+                <p>네, 설정에서 명언 표시를 켜거나 끌 수 있습니다. 카테고리별로 원하는 명언만 선택하는 것도 가능합니다.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span class="q-label">Q8</span>
+                <h3>앱이 배터리나 전력을 많이 소모하나요?</h3>
+                <svg class="faq-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+            </div>
+            <div class="faq-answer">
+                <p>Apple TV는 전원 어댑터로 동작하므로 배터리 소모 걱정이 없습니다. 앱은 효율적인 비디오 스트리밍을 사용하여 시스템 리소스를 최소한으로 사용합니다.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span class="q-label">Q9</span>
+                <h3>영상 전환 간격을 조절할 수 있나요?</h3>
+                <svg class="faq-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+            </div>
+            <div class="faq-answer">
+                <p>네, 설정 > 콘텐츠에서 영상 전환 간격을 조절할 수 있습니다. 기본값은 자동이며, 원하는 시간으로 설정 가능합니다.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span class="q-label">Q10</span>
+                <h3>무료인가요? 구독이 필요한가요?</h3>
+                <svg class="faq-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+            </div>
+            <div class="faq-answer">
+                <p>WeatherScape의 기본 기능은 무료로 제공됩니다. 추가 구독이나 인앱 결제 없이 모든 핵심 기능을 이용할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bug Report & Feature Request -->
+    <div class="info-grid">
+        <div class="glass-card">
+            <span class="section-label label-bug">Bug Report</span>
+            <h2>버그 리포트</h2>
+            <p>문제를 발견하셨나요? 아래 정보를 포함하여 이메일로 보내주세요.</p>
+            <ol class="step-list">
+                <li>발생한 문제에 대한 설명</li>
+                <li>문제 재현 방법 (단계별)</li>
+                <li>Apple TV 모델 및 tvOS 버전</li>
+                <li>WeatherScape 앱 버전</li>
+                <li>가능하면 스크린샷 또는 화면 녹화</li>
+            </ol>
+            <p style="margin-top: 16px;">보내실 곳: <a href="mailto:support@teamplayer.co.kr?subject=[WeatherScape Bug Report]">support@teamplayer.co.kr</a></p>
+        </div>
+
+        <div class="glass-card">
+            <span class="section-label label-feature">Feature Request</span>
+            <h2>기능 요청</h2>
+            <p>새로운 기능이나 개선 사항을 제안해주세요!</p>
+            <ol class="step-list">
+                <li>원하는 기능에 대한 설명</li>
+                <li>해당 기능이 필요한 이유</li>
+                <li>비슷한 기능을 가진 다른 앱 (참고용)</li>
+                <li>우선순위 (높음/보통/낮음)</li>
+            </ol>
+            <p style="margin-top: 16px;">보내실 곳: <a href="mailto:support@teamplayer.co.kr?subject=[WeatherScape Feature Request]">support@teamplayer.co.kr</a></p>
+        </div>
+    </div>
+
+    <!-- App Info -->
+    <div class="glass-card">
+        <h2>App Information</h2>
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>Version</h3>
+                <p>WeatherScape <span class="code-inline">v1.0</span> (Build 1)</p>
+                <p>Released: March 2026</p>
+            </div>
+            <div class="info-box">
+                <h3>System Requirements</h3>
+                <p>Apple TV 4K (2nd generation or later)</p>
+                <p>tvOS 17.0 or later</p>
+                <p>Internet connection required</p>
+            </div>
+            <div class="info-box">
+                <h3>Developer</h3>
+                <p>TeamPlayer</p>
+                <p><a href="https://teamplayer.co.kr">teamplayer.co.kr</a></p>
+            </div>
+            <div class="info-box">
+                <h3>Technologies</h3>
+                <p>Apple WeatherKit</p>
+                <p>Pexels API (Videos)</p>
+                <p>Pixabay (Music)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="glass-card contact-cta">
+        <h2>Contact Us</h2>
+        <p>FAQ에서 답을 찾지 못하셨나요? 언제든 문의해주세요.</p>
+        <a class="email-btn" href="mailto:support@teamplayer.co.kr">support@teamplayer.co.kr</a>
+        <p style="margin-top: 16px; font-size: 13px; color: #666;">영업일 기준 1~2일 내 답변드립니다.</p>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2026 TeamPlayer. All rights reserved. &nbsp;|&nbsp; <a href="privacy-policy.html">Privacy Policy</a></p>
+</footer>
+
+<script>
+    function toggleFaq(el) {
+        const item = el.closest('.faq-item');
+        item.classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherScape - Privacy Policy / 개인정보처리방침</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #050505;
+            color: #e0e0e0;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .nav-brand svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+        }
+
+        /* Main */
+        main {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+        }
+
+        /* Hero */
+        .page-hero {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .page-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-hero .subtitle {
+            font-size: 16px;
+            color: #777;
+        }
+
+        .updated-badge {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 48px;
+        }
+
+        .lang-btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            color: #888;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ccc;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 48px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            margin-bottom: 32px;
+        }
+
+        .glass-card h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .glass-card h2 .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(100, 160, 255, 0.12);
+            color: #6aa0ff;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .glass-card p {
+            color: #bbb;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .glass-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .glass-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0;
+        }
+
+        .glass-card ul li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            color: #bbb;
+            font-size: 15px;
+        }
+
+        .glass-card ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #6aa0ff;
+        }
+
+        .glass-card a {
+            color: #6aa0ff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .glass-card a:hover {
+            color: #8db8ff;
+        }
+
+        .glass-card strong {
+            color: #ddd;
+        }
+
+        /* Bilingual section */
+        .lang-section { display: none; }
+        .lang-section.visible { display: block; }
+
+        /* Footer */
+        footer {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+            color: #555;
+            font-size: 13px;
+        }
+
+        footer a {
+            color: #777;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #aaa;
+        }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .page-hero h1 { font-size: 28px; }
+            .glass-card { padding: 28px 20px; border-radius: 16px; }
+            .glass-card h2 { font-size: 18px; }
+            .nav-links { gap: 20px; }
+            .nav-links a { font-size: 13px; }
+            main { padding: 100px 16px 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a class="nav-brand" href="/">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="14" r="13" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                <circle cx="14" cy="11" r="5" fill="#6aa0ff" opacity="0.8"/>
+                <path d="M6 20 Q14 14 22 20" stroke="#6aa0ff" stroke-width="1.5" fill="none" opacity="0.5"/>
+            </svg>
+            WeatherScape
+        </a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="privacy-policy.html" class="active">Privacy</a></li>
+            <li><a href="support.html">Support</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <div class="page-hero">
+        <h1>Privacy Policy</h1>
+        <p class="subtitle">개인정보처리방침</p>
+        <span class="updated-badge">Last updated: 2026-03-08</span>
+    </div>
+
+    <div class="lang-toggle">
+        <button class="lang-btn active" onclick="switchLang('ko')">한국어</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+    </div>
+
+    <!-- Korean -->
+    <div id="lang-ko" class="lang-section visible">
+        <div class="glass-card">
+            <h2><span class="section-num">1</span>수집하는 정보</h2>
+            <p>WeatherScape은 현재 위치의 날씨 정보를 표시하기 위해 <strong>기기의 위치 데이터</strong>를 사용합니다. 위치 데이터는 Apple WeatherKit API 호출에만 사용되며, 별도로 저장하거나 외부 서버로 전송하지 않습니다.</p>
+        </div>
+
+        <div class="glass-card">
+            <h2><span class="section-num">2</span>외부 콘텐츠</h2>
+            <p>앱은 배경 영상과 음악을 위해 다음 외부 서비스의 콘텐츠를 사용합니다:</p>
+            <ul>
+                <li><strong>Pexels</strong> &mdash; 배경 영상 (Pexels License)</li>
+                <li><strong>Pixabay</strong> &mdash; 배경 음악 (Pixabay Content License / CC0)</li>
+            </ul>
+            <p>이 콘텐츠는 사용자 데이터 수집과 무관합니다.</p>
+        </div>
+
+        <div class="glass-card">
+            <h2><span class="section-num">3</span>데이터 수집 및 공유</h2>
+            <p>WeatherScape은 사용자의 개인정보를 수집, 저장, 공유하지 않습니다. 분석 도구, 광고 SDK, 사용자 추적 기능을 포함하지 않습니다.</p>
+        </div>
+
+        <div class="glass-card">
+            <h2><span class="section-num">4</span>문의</h2>
+            <p>개인정보 관련 문의: <a href="mailto:support@teamplayer.co.kr">support@teamplayer.co.kr</a></p>
+        </div>
+    </div>
+
+    <!-- English -->
+    <div id="lang-en" class="lang-section">
+        <div class="glass-card">
+            <h2><span class="section-num">1</span>Information We Collect</h2>
+            <p>WeatherScape uses your <strong>device location data</strong> solely to display current weather information via Apple WeatherKit. Location data is not stored or transmitted to any external server.</p>
+        </div>
+
+        <div class="glass-card">
+            <h2><span class="section-num">2</span>Third-Party Content</h2>
+            <p>The app uses content from the following services for background visuals and music:</p>
+            <ul>
+                <li><strong>Pexels</strong> &mdash; Background videos (Pexels License)</li>
+                <li><strong>Pixabay</strong> &mdash; Background music (Pixabay Content License / CC0)</li>
+            </ul>
+            <p>These services are not involved in any user data collection.</p>
+        </div>
+
+        <div class="glass-card">
+            <h2><span class="section-num">3</span>Data Collection &amp; Sharing</h2>
+            <p>WeatherScape does not collect, store, or share any personal information. The app does not include analytics tools, advertising SDKs, or user tracking features.</p>
+        </div>
+
+        <div class="glass-card">
+            <h2><span class="section-num">4</span>Contact</h2>
+            <p>For privacy inquiries: <a href="mailto:support@teamplayer.co.kr">support@teamplayer.co.kr</a></p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2026 TeamPlayer. All rights reserved. &nbsp;|&nbsp; <a href="support.html">Support</a></p>
+</footer>
+
+<script>
+    function switchLang(lang) {
+        document.querySelectorAll('.lang-section').forEach(el => el.classList.remove('visible'));
+        document.getElementById('lang-' + lang).classList.add('visible');
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+</script>
+
+</body>
+</html>

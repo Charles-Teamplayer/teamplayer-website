@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WeatherScape — 날씨가 만드는 풍경, 당신의 거실에</title>
+<meta name="description" content="Apple TV용 실시간 날씨 연동 스크린세이버. 날씨에 따라 자동으로 변하는 아름다운 영상과 BGM을 경험하세요.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050505;
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.1);
+  --glass-blur: 40px;
+  --focus-glow: 0 0 30px rgba(255,255,255,0.1);
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --text-primary: rgba(255,255,255,0.92);
+  --text-secondary: rgba(255,255,255,0.55);
+  --text-tertiary: rgba(255,255,255,0.3);
+  --accent: #6CB4EE;
+  --accent2: #EE6C9A;
+  --accent3: #6CEE9A;
+  --accent4: #EEC46C;
+  --accent5: #9A6CEE;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ─── Animations ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+@keyframes tvGlow {
+  0%, 100% { box-shadow: 0 0 60px rgba(108,180,238,0.15), 0 0 120px rgba(108,180,238,0.05); }
+  50% { box-shadow: 0 0 80px rgba(108,180,238,0.25), 0 0 160px rgba(108,180,238,0.1); }
+}
+@keyframes weatherSlide {
+  0%, 22% { opacity: 1; transform: scale(1); }
+  25%, 47% { opacity: 0; transform: scale(1.05); }
+  50%, 72% { opacity: 0; transform: scale(0.95); }
+  75%, 97% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes rain {
+  0% { transform: translateY(-10px); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(200px); opacity: 0; }
+}
+@keyframes snowfall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { transform: translateY(180px) rotate(360deg); opacity: 0; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Hero Section ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(108,180,238,0.15), transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(238,108,154,0.1), transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(108,238,154,0.05), transparent 40%);
+  animation: pulse 15s ease infinite;
+}
+.hero-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg,
+    rgba(108,180,238,0.08),
+    rgba(238,108,154,0.08),
+    rgba(108,238,154,0.08),
+    rgba(238,196,108,0.08),
+    rgba(108,180,238,0.08));
+  background-size: 400% 400%;
+  animation: heroGradient 20s ease infinite;
+}
+
+.hero-badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 0.3s forwards;
+}
+.hero h1 {
+  font-size: clamp(36px, 7vw, 72px);
+  font-weight: 800;
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 1;
+  line-height: 1.15;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 0.5s forwards;
+}
+.hero-tagline {
+  font-size: clamp(16px, 2.5vw, 22px);
+  color: var(--text-secondary);
+  margin-top: 16px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 0.7s forwards;
+  font-weight: 300;
+  letter-spacing: -0.3px;
+}
+
+/* ─── Apple TV Mockup ─── */
+.tv-mockup-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-top: 50px;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 0.9s forwards;
+}
+.tv-mockup {
+  width: clamp(300px, 55vw, 640px);
+  aspect-ratio: 16 / 10;
+  background: #111;
+  border-radius: 16px;
+  border: 3px solid #222;
+  position: relative;
+  overflow: hidden;
+  animation: tvGlow 4s ease infinite;
+}
+.tv-screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.tv-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  opacity: 0;
+  transform: scale(1.05);
+}
+.tv-scene.active {
+  opacity: 1;
+  transform: scale(1);
+}
+/* Sunny */
+.scene-sunny {
+  background: linear-gradient(180deg, #2196F3 0%, #87CEEB 40%, #E8F5E9 100%);
+}
+.scene-sunny .sun {
+  width: 60px; height: 60px;
+  background: radial-gradient(circle, #FFF176, #FFD54F);
+  border-radius: 50%;
+  position: absolute;
+  top: 20%; right: 25%;
+  box-shadow: 0 0 40px rgba(255,213,79,0.6);
+}
+.scene-sunny .caption {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  white-space: nowrap;
+}
+/* Rainy */
+.scene-rainy {
+  background: linear-gradient(180deg, #37474F 0%, #546E7A 60%, #78909C 100%);
+}
+.scene-rainy .raindrop {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(transparent, rgba(255,255,255,0.4));
+  animation: rain linear infinite;
+}
+.scene-rainy .caption {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  white-space: nowrap;
+}
+/* Snowy */
+.scene-snowy {
+  background: linear-gradient(180deg, #90A4AE 0%, #B0BEC5 50%, #ECEFF1 100%);
+}
+.scene-snowy .snowflake {
+  position: absolute;
+  width: 6px; height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: snowfall linear infinite;
+}
+.scene-snowy .caption {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  white-space: nowrap;
+}
+/* Night */
+.scene-night {
+  background: linear-gradient(180deg, #0D1B2A 0%, #1B2838 60%, #2C3E50 100%);
+}
+.scene-night .moon {
+  width: 40px; height: 40px;
+  background: radial-gradient(circle at 30% 30%, #FFF8E1, #FFE082);
+  border-radius: 50%;
+  position: absolute;
+  top: 18%; right: 20%;
+  box-shadow: 0 0 30px rgba(255,224,130,0.3);
+}
+.scene-night .star {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+.scene-night .caption {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  white-space: nowrap;
+}
+.tv-stand {
+  width: 120px;
+  height: 6px;
+  background: linear-gradient(to right, #1a1a1a, #333, #1a1a1a);
+  border-radius: 0 0 4px 4px;
+  margin: 0 auto;
+}
+.tv-label {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  letter-spacing: 2px;
+}
+
+.hero-cta {
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 1.1s forwards;
+}
+.btn-appstore {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  color: #000;
+  padding: 14px 32px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s var(--ease);
+  border: none;
+  cursor: pointer;
+}
+.btn-appstore:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(255,255,255,0.15);
+}
+.btn-appstore svg {
+  width: 22px;
+  height: 22px;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: var(--text-tertiary);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: bounce 2s ease infinite;
+}
+
+/* ─── Section Common ─── */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 40px;
+}
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #fff, rgba(255,255,255,0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 60px;
+  max-width: 600px;
+  line-height: 1.8;
+}
+.divider {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+/* ─── Features Grid ─── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.feature-card {
+  border-radius: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  padding: 36px 32px;
+  transition: all 0.5s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  transition: border-color 0.5s var(--ease);
+  pointer-events: none;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--focus-glow), 0 20px 60px rgba(0,0,0,0.4);
+  background: rgba(255,255,255,0.09);
+}
+.feature-card:hover::before {
+  border-color: rgba(255,255,255,0.15);
+}
+.feature-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.feature-icon.weather { background: rgba(108,180,238,0.15); }
+.feature-icon.video { background: rgba(238,108,154,0.15); }
+.feature-icon.caption { background: rgba(108,238,154,0.15); }
+.feature-icon.bgm { background: rgba(238,196,108,0.15); }
+
+.feature-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+.feature-card .en {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: block;
+}
+.feature-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ─── Preview Section ─── */
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.preview-card {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+}
+.preview-card:hover {
+  transform: scale(1.03);
+  z-index: 2;
+}
+.preview-scene {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 16px;
+}
+.preview-label {
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+  padding: 6px 16px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+.preview-weather-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 28px;
+}
+.preview-temp {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Preview scenes */
+.preview-sunny .preview-scene {
+  background: linear-gradient(180deg, #1976D2, #64B5F6, #C8E6C9);
+}
+.preview-rainy .preview-scene {
+  background: linear-gradient(180deg, #37474F, #546E7A, #78909C);
+}
+.preview-snowy .preview-scene {
+  background: linear-gradient(180deg, #78909C, #B0BEC5, #E0E0E0);
+}
+.preview-night .preview-scene {
+  background: linear-gradient(180deg, #0D1B2A, #1B2838, #263238);
+}
+
+/* ─── Steps Section ─── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 60px;
+}
+.step-card {
+  text-align: center;
+  padding: 40px 28px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  transition: all 0.4s var(--ease);
+}
+.step-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.08);
+}
+.step-number {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 auto 20px;
+  color: white;
+}
+.step-card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.step-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Remote guide */
+.remote-guide {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-top: 40px;
+  padding: 40px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+.remote-visual {
+  flex-shrink: 0;
+}
+.siri-remote {
+  width: 60px;
+  height: 200px;
+  background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+  border-radius: 30px;
+  border: 1px solid #333;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+.remote-touchpad {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #444;
+  background: linear-gradient(135deg, #333, #222);
+  margin-bottom: 16px;
+}
+.remote-btn {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #444;
+  margin: 4px;
+}
+.remote-btn-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.remote-info {
+  flex: 1;
+}
+.remote-info h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.remote-actions {
+  display: grid;
+  gap: 12px;
+}
+.remote-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.remote-action .key {
+  background: rgba(108,180,238,0.15);
+  color: var(--accent);
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 80px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ─── Free Section ─── */
+.free-section {
+  text-align: center;
+  padding: 100px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.free-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(108,238,154,0.08), transparent 60%);
+}
+.free-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent3), var(--accent));
+  color: #050505;
+  padding: 8px 24px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+.free-title {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, var(--accent3), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.free-subtitle {
+  font-size: 17px;
+  color: var(--text-secondary);
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  transition: all 0.3s var(--ease);
+}
+.check-item:hover {
+  background: rgba(255,255,255,0.09);
+  transform: translateY(-2px);
+}
+.check-mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent3), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #050505;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* ─── Footer ─── */
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 60px 40px;
+  text-align: center;
+}
+.footer-brand {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #fff, rgba(255,255,255,0.6));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.footer-company {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-bottom: 20px;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.3s;
+}
+.footer-links a:hover {
+  color: var(--accent);
+}
+.footer-copy {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .preview-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid { grid-template-columns: 1fr; }
+  .remote-guide { flex-direction: column; gap: 30px; }
+  .checklist { grid-template-columns: 1fr; }
+  .section { padding: 60px 24px; }
+}
+@media (max-width: 600px) {
+  .preview-grid { grid-template-columns: 1fr; }
+  .hero { padding: 40px 16px; }
+  .free-section { padding: 60px 20px; }
+  .footer { padding: 40px 20px; }
+  .remote-guide { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ Hero ═══════════ -->
+<section class="hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-badge">Apple TV Screensaver</div>
+  <h1>WeatherScape</h1>
+  <p class="hero-tagline">날씨가 만드는 풍경, 당신의 거실에</p>
+
+  <div class="tv-mockup-wrapper">
+    <div class="tv-mockup">
+      <div class="tv-screen" id="tvScreen">
+        <!-- Sunny -->
+        <div class="tv-scene scene-sunny active" data-scene="0">
+          <div class="sun"></div>
+          <div class="caption">서울 · 맑음 · 24°C &nbsp; ♫ Peaceful Morning</div>
+        </div>
+        <!-- Rainy -->
+        <div class="tv-scene scene-rainy" data-scene="1">
+          <div class="caption">서울 · 비 · 18°C &nbsp; ♫ Rain on Window</div>
+        </div>
+        <!-- Snowy -->
+        <div class="tv-scene scene-snowy" data-scene="2">
+          <div class="caption">서울 · 눈 · -2°C &nbsp; ♫ Winter Calm</div>
+        </div>
+        <!-- Night -->
+        <div class="tv-scene scene-night" data-scene="3">
+          <div class="moon"></div>
+          <div class="caption">서울 · 맑음 · 12°C &nbsp; ♫ Moonlight Sonata</div>
+        </div>
+      </div>
+    </div>
+    <div class="tv-stand"></div>
+    <div class="tv-label">APPLE TV 4K</div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#" class="btn-appstore">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      App Store에서 다운로드
+    </a>
+  </div>
+
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- ═══════════ Features ═══════════ -->
+<div class="divider"></div>
+<section class="section" id="features">
+  <div class="reveal">
+    <div class="section-label">Core Features</div>
+    <h2 class="section-title">당신의 TV를 똑똑한 창문으로</h2>
+    <p class="section-desc">WeatherScape는 실시간 날씨 데이터를 기반으로 영상, 캡션, 음악을 자동으로 선택합니다. 설정할 것은 없습니다. 그냥 켜두세요.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon weather">🌤</div>
+      <h3>실시간 날씨 연동</h3>
+      <span class="en">REAL-TIME WEATHER SYNC</span>
+      <p>OpenWeather API로 현재 위치의 날씨를 실시간 감지합니다. 맑음, 흐림, 비, 눈, 안개 등 10가지 이상의 날씨 상태를 자동 분류합니다.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon video">🎬</div>
+      <h3>자동 영상 전환</h3>
+      <span class="en">AUTO VIDEO TRANSITION</span>
+      <p>날씨 변화에 따라 적합한 영상이 부드럽게 전환됩니다. 비가 오면 빗소리가 담긴 영상으로, 눈이 오면 설경으로 자연스럽게 바뀝니다.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon caption">💬</div>
+      <h3>스마트 캡션</h3>
+      <span class="en">SMART CAPTIONS</span>
+      <p>현재 온도, 날씨, 위치, 시간대 정보를 화면 하단에 오버레이로 표시합니다. 글래스모피즘 스타일의 세련된 디자인을 적용했습니다.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon bgm">🎵</div>
+      <h3>BGM 시스템</h3>
+      <span class="en">AMBIENT MUSIC</span>
+      <p>날씨와 시간대에 맞는 배경 음악을 자동으로 재생합니다. 빗소리, 파도, 재즈, 클래식 등 분위기에 어울리는 사운드스케이프를 제공합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ Preview ═══════════ -->
+<div class="divider"></div>
+<section class="section" id="preview">
+  <div class="reveal">
+    <div class="section-label">Screensaver Preview</div>
+    <h2 class="section-title">날씨별 화면 미리보기</h2>
+    <p class="section-desc">날씨와 시간에 따라 달라지는 네 가지 대표 장면입니다. 실제 앱에서는 더 다양한 장면이 자동으로 전환됩니다.</p>
+  </div>
+
+  <div class="preview-grid">
+    <div class="preview-card preview-sunny reveal">
+      <div class="preview-scene">
+        <span class="preview-temp">24°</span>
+        <span class="preview-weather-icon">☀️</span>
+        <span class="preview-label">맑음 Sunny</span>
+      </div>
+    </div>
+    <div class="preview-card preview-rainy reveal">
+      <div class="preview-scene">
+        <span class="preview-temp">18°</span>
+        <span class="preview-weather-icon">🌧</span>
+        <span class="preview-label">비 Rainy</span>
+      </div>
+    </div>
+    <div class="preview-card preview-snowy reveal">
+      <div class="preview-scene">
+        <span class="preview-temp">-2°</span>
+        <span class="preview-weather-icon">❄️</span>
+        <span class="preview-label">눈 Snowy</span>
+      </div>
+    </div>
+    <div class="preview-card preview-night reveal">
+      <div class="preview-scene">
+        <span class="preview-temp">12°</span>
+        <span class="preview-weather-icon">🌙</span>
+        <span class="preview-label">밤 Night</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ How to Use ═══════════ -->
+<div class="divider"></div>
+<section class="section" id="howto">
+  <div class="reveal">
+    <div class="section-label">How to Use</div>
+    <h2 class="section-title">3단계로 시작하세요</h2>
+    <p class="section-desc">복잡한 설정 없이 설치 후 바로 즐길 수 있습니다.</p>
+  </div>
+
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-number">1</div>
+      <h3>App Store에서 설치</h3>
+      <p>Apple TV App Store에서 "WeatherScape"를 검색하고 무료로 다운로드하세요.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-number">2</div>
+      <h3>위치 권한 허용</h3>
+      <p>현재 위치의 날씨를 가져오기 위해 위치 접근을 허용해주세요.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-number">3</div>
+      <h3>감상하세요</h3>
+      <p>앱이 자동으로 날씨를 감지하고 최적의 풍경을 보여드립니다. 설정할 것은 없습니다.</p>
+    </div>
+  </div>
+
+  <div class="remote-guide reveal">
+    <div class="remote-visual">
+      <div class="siri-remote">
+        <div class="remote-touchpad"></div>
+        <div class="remote-btn-row">
+          <div class="remote-btn"></div>
+          <div class="remote-btn"></div>
+        </div>
+        <div class="remote-btn-row">
+          <div class="remote-btn"></div>
+          <div class="remote-btn"></div>
+        </div>
+      </div>
+    </div>
+    <div class="remote-info">
+      <h3>Siri Remote 조작법</h3>
+      <div class="remote-actions">
+        <div class="remote-action">
+          <span class="key">터치패드 좌우</span>
+          <span>이전/다음 영상으로 전환</span>
+        </div>
+        <div class="remote-action">
+          <span class="key">Play/Pause</span>
+          <span>BGM 재생/일시정지</span>
+        </div>
+        <div class="remote-action">
+          <span class="key">터치패드 클릭</span>
+          <span>캡션 표시/숨기기</span>
+        </div>
+        <div class="remote-action">
+          <span class="key">Menu</span>
+          <span>설정 화면 열기</span>
+        </div>
+        <div class="remote-action">
+          <span class="key">Siri</span>
+          <span>"오늘 날씨 보여줘"</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ Free ═══════════ -->
+<div class="divider"></div>
+<section class="free-section" id="free">
+  <div class="reveal">
+    <span class="free-badge">100% FREE</span>
+    <h2 class="free-title">모든 기능 완전 무료</h2>
+    <p class="free-subtitle">광고 없음. 인앱 결제 없음. 구독 없음. 그냥 무료입니다.</p>
+  </div>
+
+  <div class="checklist reveal">
+    <div class="check-item">
+      <span class="check-mark">✓</span>
+      <span>실시간 날씨 연동</span>
+    </div>
+    <div class="check-item">
+      <span class="check-mark">✓</span>
+      <span>자동 영상 전환</span>
+    </div>
+    <div class="check-item">
+      <span class="check-mark">✓</span>
+      <span>스마트 캡션 오버레이</span>
+    </div>
+    <div class="check-item">
+      <span class="check-mark">✓</span>
+      <span>BGM 자동 재생</span>
+    </div>
+    <div class="check-item">
+      <span class="check-mark">✓</span>
+      <span>10+ 날씨 장면</span>
+    </div>
+    <div class="check-item">
+      <span class="check-mark">✓</span>
+      <span>Siri Remote 지원</span>
+    </div>
+    <div class="check-item">
+      <span class="check-mark">✓</span>
+      <span>무제한 업데이트</span>
+    </div>
+    <div class="check-item">
+      <span class="check-mark">✓</span>
+      <span>광고/추적 없음</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ Footer ═══════════ -->
+<footer class="footer">
+  <div class="footer-brand">WeatherScape</div>
+  <div class="footer-company">by TEAMPLEAN Inc.</div>
+  <div class="footer-links">
+    <a href="mailto:charles@teamplean.com">support@teamplean.com</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 TEAMPLEAN Inc. All rights reserved.</div>
+</footer>
+
+<script>
+// ─── TV Scene Rotation ───
+(function() {
+  const scenes = document.querySelectorAll('.tv-scene');
+  let current = 0;
+
+  // Generate rain drops
+  const rainyScene = document.querySelector('.scene-rainy');
+  for (let i = 0; i < 40; i++) {
+    const drop = document.createElement('div');
+    drop.className = 'raindrop';
+    drop.style.left = Math.random() * 100 + '%';
+    drop.style.height = (15 + Math.random() * 25) + 'px';
+    drop.style.animationDuration = (0.4 + Math.random() * 0.4) + 's';
+    drop.style.animationDelay = Math.random() * 2 + 's';
+    rainyScene.appendChild(drop);
+  }
+
+  // Generate snowflakes
+  const snowyScene = document.querySelector('.scene-snowy');
+  for (let i = 0; i < 30; i++) {
+    const flake = document.createElement('div');
+    flake.className = 'snowflake';
+    flake.style.left = Math.random() * 100 + '%';
+    flake.style.width = (3 + Math.random() * 5) + 'px';
+    flake.style.height = flake.style.width;
+    flake.style.animationDuration = (3 + Math.random() * 4) + 's';
+    flake.style.animationDelay = Math.random() * 5 + 's';
+    snowyScene.appendChild(flake);
+  }
+
+  // Generate stars
+  const nightScene = document.querySelector('.scene-night');
+  for (let i = 0; i < 20; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 90 + 5 + '%';
+    star.style.top = Math.random() * 50 + 5 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    star.style.width = (1 + Math.random() * 3) + 'px';
+    star.style.height = star.style.width;
+    nightScene.appendChild(star);
+  }
+
+  setInterval(() => {
+    scenes[current].classList.remove('active');
+    current = (current + 1) % scenes.length;
+    scenes[current].classList.add('active');
+  }, 4000);
+})();
+
+// ─── Intersection Observer for Reveal ───
+(function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+</script>
+
+</body>
+</html>

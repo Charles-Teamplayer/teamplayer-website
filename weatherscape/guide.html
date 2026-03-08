@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WeatherScape — 사용 가이드</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050505;
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.1);
+  --glass-blur: 40px;
+  --text-primary: rgba(255,255,255,0.92);
+  --text-secondary: rgba(255,255,255,0.55);
+  --text-tertiary: rgba(255,255,255,0.3);
+  --accent: #6CB4EE;
+  --accent-purple: #a78bfa;
+  --accent-pink: #f472b6;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ─── Nav ─── */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  background: rgba(5,5,5,0.75);
+  border-bottom: 1px solid var(--glass-border);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text-primary);
+}
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ─── Hero ─── */
+.guide-hero {
+  text-align: center;
+  padding: 140px 40px 60px;
+  position: relative;
+}
+.guide-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(108,180,238,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.guide-hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -1.2px;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+.guide-hero p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* ─── TOC ─── */
+.toc {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  padding: 0 40px;
+}
+.toc-inner {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  backdrop-filter: blur(var(--glass-blur));
+}
+.toc-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.toc-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.toc-list a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.2s;
+}
+.toc-list a:hover { color: var(--text-primary); }
+.toc-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: rgba(108,180,238,0.15);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ─── Sections ─── */
+.section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 40px 80px;
+}
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.section-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+.divider {
+  max-width: 800px;
+  margin: 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+/* ─── Glass Card ─── */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 28px;
+  backdrop-filter: blur(var(--glass-blur));
+  margin-bottom: 20px;
+}
+.glass-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.glass-card p, .glass-card li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.glass-card ul, .glass-card ol {
+  padding-left: 20px;
+}
+
+/* ─── Steps ─── */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.step-content h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.step-content p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ─── App Store Mockup ─── */
+.appstore-mockup {
+  background: linear-gradient(135deg, rgba(0,122,255,0.15), rgba(108,180,238,0.1));
+  border: 1px solid rgba(0,122,255,0.2);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+.app-icon-mock {
+  width: 80px;
+  height: 80px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-purple), var(--accent-pink));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(108,180,238,0.3);
+}
+.app-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.app-info .app-dev {
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.app-info .app-cat {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+.app-get-btn {
+  margin-left: auto;
+  background: rgba(0,122,255,0.9);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: default;
+}
+
+/* ─── Siri Remote ─── */
+.remote-section {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+.remote-graphic {
+  flex-shrink: 0;
+  position: relative;
+}
+.remote-body {
+  width: 120px;
+  height: 380px;
+  background: linear-gradient(180deg, #2a2a2e 0%, #1a1a1e 100%);
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+}
+.remote-touchpad {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #3a3a3e, #2a2a2e);
+  border: 1px solid rgba(255,255,255,0.15);
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+.remote-touchpad.highlight {
+  box-shadow: 0 0 20px rgba(108,180,238,0.4);
+  border-color: var(--accent);
+}
+.remote-touchpad-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 9px;
+  color: var(--text-tertiary);
+  text-align: center;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.remote-touchpad-arrows {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.remote-touchpad-arrows span {
+  position: absolute;
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+.remote-touchpad-arrows .arr-up { top: 6px; left: 50%; transform: translateX(-50%); }
+.remote-touchpad-arrows .arr-down { bottom: 6px; left: 50%; transform: translateX(-50%); }
+.remote-touchpad-arrows .arr-left { left: 8px; top: 50%; transform: translateY(-50%); }
+.remote-touchpad-arrows .arr-right { right: 8px; top: 50%; transform: translateY(-50%); }
+
+.remote-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+  width: 96px;
+}
+.remote-btn-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.remote-btn {
+  height: 32px;
+  border-radius: 16px;
+  background: #3a3a3e;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  transition: box-shadow 0.3s, border-color 0.3s;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.remote-btn.wide { width: 96px; }
+.remote-btn.half { width: 44px; }
+.remote-btn.highlight {
+  box-shadow: 0 0 16px rgba(108,180,238,0.4);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.remote-btn-playpause {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #3a3a3e;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px auto 0;
+  transition: box-shadow 0.3s, border-color 0.3s;
+  cursor: pointer;
+}
+.remote-btn-playpause.highlight {
+  box-shadow: 0 0 16px rgba(108,180,238,0.4);
+  border-color: var(--accent);
+}
+.remote-btn-playpause svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--text-secondary);
+}
+.remote-btn-playpause.highlight svg {
+  fill: var(--accent);
+}
+.remote-power {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #2a2a2e;
+  border: 1px solid rgba(255,255,255,0.08);
+  margin-top: auto;
+  margin-bottom: 16px;
+}
+
+.control-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.control-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.control-item:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(108,180,238,0.3);
+}
+.control-item.active {
+  background: rgba(108,180,238,0.1);
+  border-color: rgba(108,180,238,0.3);
+}
+.control-key {
+  background: rgba(108,180,238,0.15);
+  color: var(--accent);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 80px;
+  text-align: center;
+}
+.control-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.control-desc strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ─── Settings Mockup ─── */
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.settings-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.settings-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.settings-card-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.settings-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.settings-card p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ─── Settings Detail Mockup ─── */
+.settings-mockup {
+  background: rgba(20,20,22,0.9);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.settings-mockup-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.settings-mockup-header .icon {
+  font-size: 20px;
+}
+.settings-mockup-header h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.settings-mockup-body {
+  padding: 16px 24px;
+}
+.mock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.mock-row:last-child { border-bottom: none; }
+.mock-row-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.mock-row-value {
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.mock-toggle {
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  position: relative;
+  cursor: default;
+}
+.mock-toggle.on {
+  background: #30D158;
+}
+.mock-toggle.off {
+  background: rgba(255,255,255,0.15);
+}
+.mock-toggle::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  top: 2px;
+  transition: left 0.2s;
+}
+.mock-toggle.on::after { left: 20px; }
+.mock-toggle.off::after { left: 2px; }
+.mock-slider {
+  width: 100px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.15);
+  position: relative;
+}
+.mock-slider-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--accent);
+}
+.mock-slider-thumb {
+  position: absolute;
+  top: -5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* ─── FAQ ─── */
+.faq-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.faq-question {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.faq-question:hover {
+  background: rgba(255,255,255,0.04);
+}
+.faq-q-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(108,180,238,0.15);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.faq-q-text {
+  font-size: 14px;
+  font-weight: 500;
+  flex: 1;
+}
+.faq-arrow {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  transition: transform 0.3s;
+}
+.faq-item.open .faq-arrow {
+  transform: rotate(180deg);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.faq-item.open .faq-answer {
+  max-height: 300px;
+}
+.faq-answer-inner {
+  padding: 0 24px 20px;
+  padding-left: 66px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ─── Contact ─── */
+.contact-card {
+  background: linear-gradient(135deg, rgba(108,180,238,0.1), rgba(167,139,250,0.08));
+  border: 1px solid rgba(108,180,238,0.2);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+}
+.contact-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.contact-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(108,180,238,0.15);
+  border: 1px solid rgba(108,180,238,0.25);
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.contact-email:hover {
+  background: rgba(108,180,238,0.25);
+}
+
+/* ─── Footer ─── */
+.footer {
+  text-align: center;
+  padding: 40px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  border-top: 1px solid var(--glass-border);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: rgba(5,5,5,0.95);
+    backdrop-filter: blur(30px);
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .nav-hamburger { display: block; }
+  .guide-hero h1 { font-size: 28px; }
+  .section { padding: 40px 20px 60px; }
+  .toc { padding: 0 20px; }
+  .toc-list { grid-template-columns: 1fr; }
+  .remote-section { flex-direction: column; align-items: center; }
+  .settings-grid { grid-template-columns: 1fr; }
+  .appstore-mockup { flex-direction: column; text-align: center; }
+  .app-get-btn { margin-left: 0; margin-top: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ Nav ═══ -->
+<nav class="top-nav">
+  <div class="nav-inner">
+    <a href="../design-final.html" class="nav-logo">WeatherScape</a>
+    <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="../design-final.html">HOME</a></li>
+      <li><a href="#install" class="active">GUIDE</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══ Hero ═══ -->
+<header class="guide-hero">
+  <h1>사용 가이드</h1>
+  <p>WeatherScape를 처음 사용하는 분들을 위한 안내서</p>
+</header>
+
+<!-- ═══ TOC ═══ -->
+<div class="toc">
+  <div class="toc-inner">
+    <div class="toc-title">목차</div>
+    <ul class="toc-list">
+      <li><a href="#install"><span class="toc-num">1</span> 설치 방법</a></li>
+      <li><a href="#setup"><span class="toc-num">2</span> 첫 실행 설정</a></li>
+      <li><a href="#remote"><span class="toc-num">3</span> Siri Remote 조작법</a></li>
+      <li><a href="#settings"><span class="toc-num">4</span> 설정 가이드</a></li>
+      <li><a href="#faq"><span class="toc-num">5</span> FAQ</a></li>
+      <li><a href="#contact"><span class="toc-num">6</span> 문의</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     01. 설치 방법
+     ═══════════════════════════════════════ -->
+<div class="divider"></div>
+<section id="install" class="section">
+  <div class="section-label">STEP 01</div>
+  <h2 class="section-title">설치 방법</h2>
+  <p class="section-desc">Apple TV App Store에서 WeatherScape를 검색하고 설치하세요.</p>
+
+  <div class="appstore-mockup">
+    <div class="app-icon-mock">&#9925;</div>
+    <div class="app-info">
+      <h3>WeatherScape</h3>
+      <div class="app-dev">TeamPlayer Inc.</div>
+      <div class="app-cat">엔터테인먼트 &middot; 스크린세이버</div>
+    </div>
+    <button class="app-get-btn">받기</button>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>App Store 열기</h4>
+        <p>Apple TV 홈 화면에서 App Store를 선택합니다.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>WeatherScape 검색</h4>
+        <p>상단 검색 탭에서 "WeatherScape"를 입력합니다.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>앱 설치</h4>
+        <p>"받기" 버튼을 눌러 설치를 완료합니다. Apple ID 인증이 필요할 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>앱 실행</h4>
+        <p>설치가 완료되면 홈 화면에서 WeatherScape 아이콘을 선택하여 실행합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     02. 첫 실행 설정
+     ═══════════════════════════════════════ -->
+<div class="divider"></div>
+<section id="setup" class="section">
+  <div class="section-label">STEP 02</div>
+  <h2 class="section-title">첫 실행 설정</h2>
+  <p class="section-desc">앱을 처음 실행하면 최적의 경험을 위한 간단한 설정이 진행됩니다.</p>
+
+  <div class="glass-card">
+    <h3>&#128205; 위치 권한 허용</h3>
+    <p>WeatherScape는 현재 위치의 날씨를 자동으로 감지하여 그에 맞는 영상, 명언, 배경 음악을 제공합니다. 앱이 위치 권한을 요청하면 <strong style="color:var(--text-primary)">"허용"</strong>을 선택해 주세요.</p>
+    <br>
+    <p>위치 권한을 거부하면 기본 도시(서울)를 기준으로 날씨를 표시합니다. 나중에 설정에서 도시를 수동으로 변경할 수 있습니다.</p>
+  </div>
+
+  <div class="glass-card">
+    <h3>&#127326; 날씨 자동 감지</h3>
+    <p>위치 권한이 허용되면 다음이 자동으로 설정됩니다:</p>
+    <ul>
+      <li>현재 날씨 상태(맑음, 흐림, 비, 눈 등) 감지</li>
+      <li>날씨에 맞는 자연 풍경 영상 자동 선택</li>
+      <li>날씨 분위기에 어울리는 명언 표시</li>
+      <li>날씨 정보 오버레이(기온, 습도, 바람)</li>
+    </ul>
+    <br>
+    <p style="font-size:12px; color:var(--text-tertiary)">날씨 정보는 15분 간격으로 자동 업데이트됩니다.</p>
+  </div>
+
+  <div class="glass-card">
+    <h3>&#127916; 바로 시작</h3>
+    <p>설정이 완료되면 자동으로 스크린세이버가 시작됩니다. 날씨에 맞는 아름다운 4K 자연 영상이 재생되며, 화면 위에 날씨 정보와 명언이 우아하게 표시됩니다.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     03. Siri Remote 조작법
+     ═══════════════════════════════════════ -->
+<div class="divider"></div>
+<section id="remote" class="section">
+  <div class="section-label">STEP 03</div>
+  <h2 class="section-title">Siri Remote 조작법</h2>
+  <p class="section-desc">Siri Remote로 WeatherScape의 모든 기능을 제어할 수 있습니다. 항목을 클릭하면 리모컨에서 해당 버튼이 강조됩니다.</p>
+
+  <div class="remote-section">
+    <!-- Siri Remote CSS Graphic -->
+    <div class="remote-graphic">
+      <div class="remote-body">
+        <div class="remote-touchpad" id="remoteTouchpad">
+          <div class="remote-touchpad-label">Touch<br>Surface</div>
+          <div class="remote-touchpad-arrows">
+            <span class="arr-up">&#9650;</span>
+            <span class="arr-down">&#9660;</span>
+            <span class="arr-left">&#9664;</span>
+            <span class="arr-right">&#9654;</span>
+          </div>
+        </div>
+        <div class="remote-buttons">
+          <div class="remote-btn-row">
+            <div class="remote-btn half" id="remoteMenu" data-label="menu">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M21 13H3a1 1 0 010-2h18a1 1 0 010 2zm0-6H3a1 1 0 010-2h18a1 1 0 010 2zm0 12H3a1 1 0 010-2h18a1 1 0 010 2z"/></svg>
+            </div>
+            <div class="remote-btn half" id="remoteTvBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="4" width="20" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="remote-btn-playpause" id="remotePlayPause">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/><rect x="14" y="5" width="3" height="14" rx="1" opacity="0"/></svg>
+        </div>
+        <div class="remote-power"></div>
+      </div>
+    </div>
+
+    <!-- Control List -->
+    <div class="control-list">
+      <div class="control-item" data-target="remoteTouchpad" data-type="touchpad">
+        <span class="control-key">Select (클릭)</span>
+        <span class="control-desc"><strong>오버레이 표시/숨기기</strong> &mdash; 터치패드를 클릭하면 날씨 정보와 명언 오버레이가 나타나거나 사라집니다.</span>
+      </div>
+      <div class="control-item" data-target="remoteMenu" data-type="button">
+        <span class="control-key">Menu</span>
+        <span class="control-desc"><strong>메뉴 열기</strong> &mdash; 설정, 컨텐츠 브라우저, 명언 관리 등 메뉴에 접근합니다.</span>
+      </div>
+      <div class="control-item" data-target="remotePlayPause" data-type="playpause">
+        <span class="control-key">Play / Pause</span>
+        <span class="control-desc"><strong>재생 / 일시정지</strong> &mdash; 현재 영상의 재생을 일시 멈추거나 다시 시작합니다.</span>
+      </div>
+      <div class="control-item" data-target="remoteTouchpad" data-type="touchpad">
+        <span class="control-key">좌/우 스와이프</span>
+        <span class="control-desc"><strong>이전/다음 영상</strong> &mdash; 터치패드를 좌우로 스와이프하여 영상을 전환합니다.</span>
+      </div>
+      <div class="control-item" data-target="remoteTouchpad" data-type="touchpad">
+        <span class="control-key">위 스와이프</span>
+        <span class="control-desc"><strong>명언 변경</strong> &mdash; 터치패드를 위로 스와이프하면 새로운 명언이 표시됩니다.</span>
+      </div>
+      <div class="control-item" data-target="remoteTouchpad" data-type="touchpad">
+        <span class="control-key">아래 스와이프</span>
+        <span class="control-desc"><strong>오버레이 숨기기</strong> &mdash; 터치패드를 아래로 스와이프하면 모든 오버레이가 숨겨집니다.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     04. 설정 가이드
+     ═══════════════════════════════════════ -->
+<div class="divider"></div>
+<section id="settings" class="section">
+  <div class="section-label">STEP 04</div>
+  <h2 class="section-title">설정 가이드</h2>
+  <p class="section-desc">Menu 버튼을 눌러 설정 화면에 접근할 수 있습니다. 각 설정 항목을 세부적으로 조정하여 나만의 스크린세이버를 만들어보세요.</p>
+
+  <!-- Settings Overview Grid -->
+  <div class="settings-grid" style="margin-bottom: 40px;">
+    <div class="settings-card">
+      <div class="settings-card-icon">&#9925;</div>
+      <h4>날씨 / 위치</h4>
+      <p>위치 권한, 도시 선택, 날씨 업데이트 간격을 설정합니다.</p>
+    </div>
+    <div class="settings-card">
+      <div class="settings-card-icon">&#9654;</div>
+      <h4>컨텐츠</h4>
+      <p>영상 전환 간격, 전환 효과, 카테고리를 설정합니다.</p>
+    </div>
+    <div class="settings-card">
+      <div class="settings-card-icon">&#10077;</div>
+      <h4>자막 / 명언</h4>
+      <p>자막 표시 여부, 언어, 명언 카테고리를 설정합니다.</p>
+    </div>
+    <div class="settings-card">
+      <div class="settings-card-icon">&#9835;</div>
+      <h4>배경 음악</h4>
+      <p>BGM 켜기/끄기, 볼륨 조절, 음악 카테고리를 선택합니다.</p>
+    </div>
+    <div class="settings-card">
+      <div class="settings-card-icon">&#127912;</div>
+      <h4>화면 설정</h4>
+      <p>시계 표시, 날씨 위젯 스타일, 테마를 설정합니다.</p>
+    </div>
+    <div class="settings-card">
+      <div class="settings-card-icon">&#8505;</div>
+      <h4>앱 정보</h4>
+      <p>버전 정보 확인 및 모든 설정을 초기화합니다.</p>
+    </div>
+  </div>
+
+  <!-- Weather Settings Mockup -->
+  <div class="settings-mockup">
+    <div class="settings-mockup-header">
+      <span class="icon">&#9925;</span>
+      <h4>날씨 / 위치 설정</h4>
+    </div>
+    <div class="settings-mockup-body">
+      <div class="mock-row">
+        <span class="mock-row-label">위치 서비스</span>
+        <div class="mock-toggle on"></div>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">현재 도시</span>
+        <span class="mock-row-value">서울</span>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">업데이트 간격</span>
+        <span class="mock-row-value">15분</span>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">온도 단위</span>
+        <span class="mock-row-value">&#8451;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Settings Mockup -->
+  <div class="settings-mockup">
+    <div class="settings-mockup-header">
+      <span class="icon">&#9654;</span>
+      <h4>컨텐츠 설정</h4>
+    </div>
+    <div class="settings-mockup-body">
+      <div class="mock-row">
+        <span class="mock-row-label">영상 전환 간격</span>
+        <span class="mock-row-value">2분</span>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">전환 효과</span>
+        <span class="mock-row-value">크로스페이드</span>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">영상 해상도</span>
+        <span class="mock-row-value">4K (권장)</span>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">자동 카테고리</span>
+        <div class="mock-toggle on"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote Settings Mockup -->
+  <div class="settings-mockup">
+    <div class="settings-mockup-header">
+      <span class="icon">&#10077;</span>
+      <h4>자막 / 명언 설정</h4>
+    </div>
+    <div class="settings-mockup-body">
+      <div class="mock-row">
+        <span class="mock-row-label">명언 표시</span>
+        <div class="mock-toggle on"></div>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">표시 시간</span>
+        <span class="mock-row-value">10초</span>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">언어</span>
+        <span class="mock-row-value">한국어</span>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">카테고리</span>
+        <span class="mock-row-value">전체</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BGM Settings Mockup -->
+  <div class="settings-mockup">
+    <div class="settings-mockup-header">
+      <span class="icon">&#9835;</span>
+      <h4>배경 음악 (BGM) 설정</h4>
+    </div>
+    <div class="settings-mockup-body">
+      <div class="mock-row">
+        <span class="mock-row-label">배경 음악</span>
+        <div class="mock-toggle on"></div>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">볼륨</span>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="mock-slider">
+            <div class="mock-slider-fill" style="width:30%;"></div>
+            <div class="mock-slider-thumb" style="left:calc(30% - 8px);"></div>
+          </div>
+          <span class="mock-row-value">30%</span>
+        </div>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">카테고리</span>
+        <span class="mock-row-value">Ambient</span>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">날씨 연동</span>
+        <div class="mock-toggle on"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Appearance Settings Mockup -->
+  <div class="settings-mockup">
+    <div class="settings-mockup-header">
+      <span class="icon">&#127912;</span>
+      <h4>화면 설정</h4>
+    </div>
+    <div class="settings-mockup-body">
+      <div class="mock-row">
+        <span class="mock-row-label">시계 표시</span>
+        <div class="mock-toggle on"></div>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">날씨 위젯</span>
+        <div class="mock-toggle on"></div>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">위젯 위치</span>
+        <span class="mock-row-value">좌측 하단</span>
+      </div>
+      <div class="mock-row">
+        <span class="mock-row-label">테마</span>
+        <span class="mock-row-value">자동 (날씨 연동)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     05. FAQ
+     ═══════════════════════════════════════ -->
+<div class="divider"></div>
+<section id="faq" class="section">
+  <div class="section-label">STEP 05</div>
+  <h2 class="section-title">자주 묻는 질문</h2>
+  <p class="section-desc">WeatherScape 사용 중 궁금한 점이 있으시면 아래 FAQ를 확인해 주세요.</p>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span class="faq-q-icon">Q</span>
+      <span class="faq-q-text">영상이 나오지 않아요.</span>
+      <span class="faq-arrow">&#9660;</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        네트워크 연결을 확인해 주세요. WeatherScape는 Pexels API를 통해 실시간으로 영상을 불러옵니다. Wi-Fi가 정상적으로 연결되어 있는지, Apple TV의 인터넷 연결 상태를 확인해 주세요. 문제가 지속되면 앱을 재시작하거나 설정에서 캐시를 초기화해 보세요.
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span class="faq-q-icon">Q</span>
+      <span class="faq-q-text">날씨 정보가 실제와 다릅니다.</span>
+      <span class="faq-arrow">&#9660;</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        설정 &gt; 날씨 / 위치에서 위치 서비스가 "허용"으로 되어 있는지 확인해 주세요. 위치 권한이 꺼져 있으면 기본 도시(서울) 기준으로 날씨가 표시됩니다. Apple TV 설정 &gt; 개인정보 보호 &gt; 위치 서비스에서도 WeatherScape의 위치 접근을 허용해야 합니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span class="faq-q-icon">Q</span>
+      <span class="faq-q-text">배경 음악(BGM)을 끄고 싶어요.</span>
+      <span class="faq-arrow">&#9660;</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        Menu 버튼을 눌러 설정으로 이동한 후, "배경 음악" 항목에서 토글을 꺼 주세요. BGM이 즉시 중지됩니다. 볼륨만 줄이고 싶다면 같은 메뉴에서 볼륨 슬라이더를 조절할 수 있습니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span class="faq-q-icon">Q</span>
+      <span class="faq-q-text">영상 전환이 너무 빨라요 / 느려요.</span>
+      <span class="faq-arrow">&#9660;</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        설정 &gt; 컨텐츠에서 "영상 전환 간격"을 원하는 시간으로 변경할 수 있습니다. 기본값은 2분이며, 30초에서 10분까지 설정이 가능합니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span class="faq-q-icon">Q</span>
+      <span class="faq-q-text">명언/자막을 끄거나 언어를 바꾸고 싶어요.</span>
+      <span class="faq-arrow">&#9660;</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        설정 &gt; 자막 / 명언에서 "명언 표시" 토글을 끄면 명언이 더 이상 표시되지 않습니다. 언어를 변경하거나 특정 카테고리(동기부여, 철학, 유머 등)만 선택할 수도 있습니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span class="faq-q-icon">Q</span>
+      <span class="faq-q-text">데이터 사용량이 걱정됩니다.</span>
+      <span class="faq-arrow">&#9660;</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        WeatherScape는 영상 캐싱 시스템을 내장하고 있어, 한 번 불러온 영상은 최대 150MB까지 로컬에 저장됩니다. 같은 날씨 조건에서는 캐시된 영상이 재생되어 데이터 사용이 최소화됩니다. 캐시는 1시간마다 자동 갱신됩니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span class="faq-q-icon">Q</span>
+      <span class="faq-q-text">앱을 초기 상태로 되돌리고 싶어요.</span>
+      <span class="faq-arrow">&#9660;</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        설정 화면 하단의 "모든 설정 초기화" 버튼을 선택하면 모든 설정이 기본값으로 복원됩니다. 날씨 업데이트 간격, BGM 볼륨, 전환 효과 등이 모두 초기화됩니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span class="faq-q-icon">Q</span>
+      <span class="faq-q-text">Apple TV 스크린세이버로 설정할 수 있나요?</span>
+      <span class="faq-arrow">&#9660;</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        WeatherScape는 독립 실행형 앱입니다. 앱을 실행한 상태로 두면 자동으로 스크린세이버처럼 동작합니다. Apple TV의 시스템 스크린세이버를 대체하는 것이 아닌, 앱 자체가 스크린세이버 역할을 수행합니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     06. 문의
+     ═══════════════════════════════════════ -->
+<div class="divider"></div>
+<section id="contact" class="section">
+  <div class="section-label">STEP 06</div>
+  <h2 class="section-title">문의하기</h2>
+  <p class="section-desc">FAQ에서 해결되지 않는 문제가 있다면 언제든 연락해 주세요.</p>
+
+  <div class="contact-card">
+    <h3>도움이 필요하신가요?</h3>
+    <p>WeatherScape 관련 문의, 버그 리포트, 기능 제안 등 무엇이든 환영합니다.</p>
+    <a href="mailto:support@teamplayer.co.kr" class="contact-email">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+      support@teamplayer.co.kr
+    </a>
+  </div>
+</section>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  &copy; 2026 TeamPlayer Inc. All rights reserved. &mdash; WeatherScape v1.0.0
+</footer>
+
+<!-- ═══ JS ═══ -->
+<script>
+// FAQ toggle
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  // Toggle current
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Siri Remote interaction
+const controlItems = document.querySelectorAll('.control-item');
+
+controlItems.forEach(item => {
+  item.addEventListener('mouseenter', () => {
+    // Clear all highlights
+    clearHighlights();
+    // Highlight this item
+    item.classList.add('active');
+    // Highlight remote element
+    const targetId = item.dataset.target;
+    const el = document.getElementById(targetId);
+    if (el) el.classList.add('highlight');
+  });
+
+  item.addEventListener('mouseleave', () => {
+    clearHighlights();
+    item.classList.remove('active');
+  });
+});
+
+function clearHighlights() {
+  document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+  document.querySelectorAll('.control-item.active').forEach(el => el.classList.remove('active'));
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // Close mobile nav
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+
+// Active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
