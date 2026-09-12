@@ -1,13 +1,11 @@
 # TEAMPLAYER 공식 웹사이트
 
 ## 프로젝트 개요
-㈜팀플레이어 공식 웹사이트 - https://www.teamplayer.co.kr
+팀플레이어 공식 웹사이트 - https://teamplayer.co.kr
 
 ## 기술 스택
-- Next.js 14
-- React 18
-- HTML5/CSS3
-- AWS S3 + CloudFront
+- HTML5/CSS3 정적 export
+- GitHub Pages
 
 ## 주요 기능
 - 반응형 웹 디자인
@@ -29,16 +27,9 @@
 - IMSMS 제품 소개
 - 파트너십 및 글로벌 네트워크 섹션
 
-## 배포 방법
+## 배포 경계
 
-### S3 배포
-```bash
-# S3 동기화
-aws s3 sync . s3://teamplayer-website/ --exclude ".git/*" --exclude ".DS_Store" --exclude "_next/*" --delete
-
-# CloudFront 캐시 무효화
-aws cloudfront create-invalidation --distribution-id E2P9KZWX3A6ET0 --paths "/*"
-```
+`.github/workflows/deploy.yml`이 저장소 전체를 GitHub Pages artifact로 배포합니다. 재빌드 가능한 Next.js 원본은 이 저장소에 포함되어 있지 않습니다.
 
 ## 디렉토리 구조
 ```
@@ -56,10 +47,11 @@ aws cloudfront create-invalidation --distribution-id E2P9KZWX3A6ET0 --paths "/*"
 ```
 
 ## 연락처
-- 대표: 김원철
-- 이메일: charles@teamplayer.co.kr
-- 전화: 1522-8061 / 070-8080-0511
+- 대표: 김은경
+- 이메일: teamplayer@teamplayer.co.kr
+- 전화: 1522-8061
 - 주소: 경기도 용인시 기흥구 동백로 22
+- 사업자등록번호: 593-77-00117
 
 ## 라이선스
-Copyright © 2024 TEAMPLAYER Inc. All rights reserved.
+Copyright © 2024 TEAMPLAYER. All rights reserved.
