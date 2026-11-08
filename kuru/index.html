@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KURU | TEAMPLAYER</title>
+<meta name="description" content="KURU — 여러 채널 메시지를 한곳에서 받고 답하고, 예약과 고객 기록을 함께 관리하는 매장용 메시징 서비스.">
+<link rel="icon" href="/favicon.ico">
+<link rel="alternate" hreflang="ko" href="https://teamplayer.co.kr/kuru/?lang=ko">
+<link rel="alternate" hreflang="ja" href="https://teamplayer.co.kr/kuru/?lang=ja">
+<link rel="alternate" hreflang="en" href="https://teamplayer.co.kr/kuru/?lang=en">
+<style>
+:root{--teal:#176e62;--teal-weak:#e6f1ee;--stamp:#b92b27;--ink:#1d2624;--sub:#55625f;--line:#dfe7e4;--bg:#fbfaf7;--card:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Hiragino Sans","Noto Sans JP","Noto Sans KR","Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:rgba(251,250,247,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:.04em}
+.brand svg{width:34px;height:34px}
+.nav{display:flex;align-items:center;gap:14px;font-size:14px}
+.nav .co{color:var(--sub)}
+.langs{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.langs button{border:0;background:none;padding:5px 11px;font:inherit;font-size:13px;cursor:pointer;color:var(--sub)}
+.langs button[aria-pressed=true]{background:var(--teal);color:#fff}
+.hero{padding:72px 0 56px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;color:var(--teal);background:var(--teal-weak);padding:4px 12px;border-radius:999px;margin-bottom:18px}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.25;letter-spacing:-.01em;margin-bottom:18px}
+.lead{font-size:18px;color:var(--sub);margin-bottom:28px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:12px;font-weight:700;font-size:16px}
+.btn.primary{background:var(--stamp);color:#fff}
+.btn.primary:hover{background:#9e2421}
+.btn.ghost{border:1.5px solid var(--teal);color:var(--teal)}
+.btn.ghost:hover{background:var(--teal-weak)}
+.mock{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 50px rgba(23,110,98,.12);padding:18px}
+.mock-h{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;margin-bottom:12px}
+.mock-h svg{width:22px;height:22px}
+.msg{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:12px}
+.msg+.msg{margin-top:4px}
+.msg:nth-child(odd){background:#f6f8f7}
+.ch{flex:none;font-size:11px;font-weight:700;color:#fff;border-radius:6px;padding:2px 7px;margin-top:2px}
+.msg b{display:block;font-size:13px}
+.msg span{font-size:13px;color:var(--sub)}
+.reply{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px;font-size:13px;color:var(--teal);font-weight:600}
+section{padding:64px 0}
+h2{font-size:clamp(24px,3.4vw,32px);line-height:1.35;margin-bottom:10px;text-align:center}
+.sec-lead{text-align:center;color:var(--sub);margin-bottom:36px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+.ico{width:46px;height:46px;border-radius:12px;background:var(--teal-weak);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.ico svg{width:24px;height:24px;stroke:var(--teal);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:19px;margin-bottom:8px}
+.card p{color:var(--sub);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.chips span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:15px;font-weight:600}
+.alt{background:var(--teal-weak)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tag{display:inline-block;font-size:12px;font-weight:700;color:var(--stamp);border:1px solid var(--stamp);border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+.cta{background:var(--teal);color:#fff;border-radius:24px;padding:48px 28px;text-align:center}
+.cta h2{color:#fff}
+.cta p{opacity:.85;margin-bottom:24px}
+.cta .btns{justify-content:center}
+.cta .btn.ghost{border-color:#fff;color:#fff}
+.cta .btn.ghost:hover{background:rgba(255,255,255,.12)}
+footer{padding:32px 0 48px;color:var(--sub);font-size:13px;text-align:center}
+footer a{text-decoration:underline}
+@media (max-width:820px){
+  .hero{padding:44px 0 36px}
+  .hero-grid,.grid3,.grid2{grid-template-columns:1fr}
+  .nav .co{display:none}
+  section{padding:48px 0}
+  .btn{flex:1 1 100%}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="/kuru/" aria-label="KURU">
+      <svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="94" fill="#b92b27"/><g transform="rotate(-8 100 100)" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"><path d="M74 54H126"/><path d="M52 98H148"/><path d="M100 36V162"/><path d="M100 104L64 152"/><path d="M100 104L136 152"/></g><g transform="rotate(-8 100 100)" fill="#fff"><circle cx="80" cy="76" r="8.5"/><circle cx="120" cy="76" r="8.5"/></g></svg>
+      KURU
+    </a>
+    <nav class="nav">
+      <a class="co" href="/" data-i="nav.company"></a>
+      <div class="langs" role="group" aria-label="Language">
+        <button type="button" data-lang="ko">한국어</button>
+        <button type="button" data-lang="ja">日本語</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow" data-i="hero.eyebrow"></span>
+        <h1 data-i="hero.title"></h1>
+        <p class="lead" data-i="hero.lead"></p>
+        <div class="btns">
+          <a class="btn primary js-demo" href="/kuru/demo/" data-i="btn.demo"></a>
+          <a class="btn ghost" href="/support/" data-i="btn.contact"></a>
+        </div>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="mock-h"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="94" fill="#176e62"/><g transform="rotate(-8 100 100)" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round"><path d="M74 54H126"/><path d="M52 98H148"/><path d="M100 36V162"/><path d="M100 104L64 152"/><path d="M100 104L136 152"/></g></svg><span data-i="mock.title"></span></div>
+        <div class="msg"><i class="ch" style="background:#06c755">LINE</i><div><b data-i="mock.m1n"></b><span data-i="mock.m1"></span></div></div>
+        <div class="msg"><i class="ch" style="background:#2f7cf6">iMessage</i><div><b data-i="mock.m2n"></b><span data-i="mock.m2"></span></div></div>
+        <div class="msg"><i class="ch" style="background:#8b5b20" data-i="mock.webform"></i><div><b data-i="mock.m3n"></b><span data-i="mock.m3"></span></div></div>
+        <div class="msg"><i class="ch" style="background:#55625f" data-i="mock.email"></i><div><b data-i="mock.m4n"></b><span data-i="mock.m4"></span></div></div>
+        <div class="reply" data-i="mock.reply"></div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2 data-i="feat.title"></h2>
+      <p class="sec-lead" data-i="feat.lead"></p>
+      <div class="grid3">
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></div>
+          <h3 data-i="f1.t"></h3><p data-i="f1.d"></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M8 14h3"/></svg></div>
+          <h3 data-i="f2.t"></h3><p data-i="f2.d"></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/><path d="M18 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></div>
+          <h3 data-i="f3.t"></h3><p data-i="f3.d"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <h2 data-i="ch.title"></h2>
+      <p class="sec-lead" data-i="ch.lead"></p>
+      <div class="chips">
+        <span>LINE</span><span>iMessage</span><span data-i="ch.email"></span><span data-i="ch.webform"></span><span>SMS</span><span data-i="ch.kakao"></span><span data-i="ch.phone"></span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 data-i="plan.title"></h2>
+      <p class="sec-lead" data-i="plan.lead"></p>
+      <div class="grid2">
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M7 7V5h10v2M7 13h4"/></svg></div>
+          <h3 data-i="p1.t"></h3><p data-i="p1.d"></p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.6-7.95A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/></svg></div>
+          <h3><span data-i="p2.t"></span><span class="tag" data-i="p2.tag"></span></h3><p data-i="p2.d"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta">
+        <h2 data-i="cta.title"></h2>
+        <p data-i="cta.lead"></p>
+        <div class="btns">
+          <a class="btn primary js-demo" href="/kuru/demo/" data-i="btn.demo"></a>
+          <a class="btn ghost" href="/support/" data-i="btn.contact"></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© TEAMPLAYER · <a href="/" data-i="nav.company"></a></div>
+</footer>
+
+<script>
+var T={
+ko:{
+"nav.company":"TEAMPLAYER 홈",
+"hero.eyebrow":"매장용 메시징 서비스",
+"hero.title":"메시지는 한곳에,<br>고객 기록은 든든하게.",
+"hero.lead":"LINE·iMessage·이메일·웹 폼으로 들어오는 손님 메시지를 한 화면에서 받고 답하세요. 예약과 고객 기록, AI 비서까지 KURU 하나로 이어집니다.",
+"btn.demo":"체험하기","btn.contact":"문의하기",
+"mock.title":"받은 메시지","mock.webform":"웹 폼","mock.email":"이메일",
+"mock.m1n":"사토 님","mock.m1":"토요일 저녁 7시, 2명 예약 가능할까요?",
+"mock.m2n":"김 님","mock.m2":"주차 가능한가요?",
+"mock.m3n":"예약 요청","mock.m3":"11월 20일 12:00 · 4명",
+"mock.m4n":"Smith","mock.m4":"Do you have an English menu?",
+"mock.reply":"AI 비서가 답장 초안을 준비했어요 → 확인 후 보내기",
+"feat.title":"KURU로 할 수 있는 일","feat.lead":"흩어진 대화와 예약, 고객 정보를 한곳에 모읍니다.",
+"f1.t":"여러 채널을 한 화면에서","f1.d":"채널마다 앱을 오갈 필요 없이, 들어온 메시지를 한 받은함에서 확인하고 같은 화면에서 답장합니다.",
+"f2.t":"예약과 고객 기록","f2.d":"손님 예약을 받고, 대화·방문 이력을 고객별로 차곡차곡 남깁니다. 다음 응대가 더 빨라집니다.",
+"f3.t":"AI 비서","f3.d":"자주 오는 질문에 답장 초안을 만들고 오늘 할 일을 정리합니다. 보내기 전에 사장님이 확인합니다.",
+"ch.title":"손님이 쓰는 채널 그대로","ch.lead":"손님에게 새 앱을 깔게 하지 않아도 됩니다.",
+"ch.email":"이메일","ch.webform":"웹 폼","ch.kakao":"카카오톡","ch.phone":"전화(데모)",
+"plan.title":"원하는 방식으로 시작","plan.lead":"웹과 모바일, 어디서든 같은 화면으로 관리합니다.",
+"p1.t":"KURU 박스","p1.d":"가게에 두는 전용 박스를 구매해 바로 시작합니다. 고객 기록은 우리 가게 박스에 담깁니다.",
+"p2.t":"KURU 클라우드","p2.tag":"준비 중","p2.d":"박스 없이 온라인으로 쓰는 서비스형(SaaS) 요금제를 준비하고 있습니다.",
+"cta.title":"지금 바로 체험해 보세요","cta.lead":"설치 없이 브라우저에서 KURU 화면을 직접 써 볼 수 있습니다."
+},
+ja:{
+"nav.company":"TEAMPLAYER ホーム",
+"hero.eyebrow":"店舗向けメッセージサービス",
+"hero.title":"メッセージはひとつに。<br>顧客の記録は、しっかりと。",
+"hero.lead":"LINE・iMessage・メール・Webフォームから届くお客様のメッセージを、ひとつの画面で受けて返信。予約・顧客の記録・AIアシスタントまで、KURUひとつでつながります。",
+"btn.demo":"体験する","btn.contact":"お問い合わせ",
+"mock.title":"受信メッセージ","mock.webform":"Webフォーム","mock.email":"メール",
+"mock.m1n":"佐藤様","mock.m1":"土曜の19時、2名で予約できますか？",
+"mock.m2n":"キム様","mock.m2":"駐車場はありますか？",
+"mock.m3n":"予約リクエスト","mock.m3":"11月20日 12:00・4名",
+"mock.m4n":"Smith","mock.m4":"Do you have an English menu?",
+"mock.reply":"AIアシスタントが返信の下書きを用意しました → 確認して送信",
+"feat.title":"KURUでできること","feat.lead":"散らばった会話・予約・顧客情報をひとつにまとめます。",
+"f1.t":"複数チャネルをひとつの画面で","f1.d":"チャネルごとにアプリを行き来せず、届いたメッセージをひとつの受信箱で確認し、同じ画面で返信します。",
+"f2.t":"予約と顧客の記録","f2.d":"お客様の予約を受け付け、会話や来店の履歴を顧客ごとに残します。次の接客がもっとスムーズに。",
+"f3.t":"AIアシスタント","f3.d":"よくある質問に返信の下書きを作り、今日やることを整理します。送信前にオーナーが確認します。",
+"ch.title":"お客様が使うチャネルのまま","ch.lead":"お客様に新しいアプリを入れてもらう必要はありません。",
+"ch.email":"メール","ch.webform":"Webフォーム","ch.kakao":"カカオトーク","ch.phone":"電話（デモ）",
+"plan.title":"お好きな形ではじめる","plan.lead":"Webでもモバイルでも、どこからでも同じ画面で管理できます。",
+"p1.t":"KURUボックス","p1.d":"お店に置く専用ボックスを購入して、すぐに始められます。顧客の記録はお店のボックスに保管されます。",
+"p2.t":"KURUクラウド","p2.tag":"準備中","p2.d":"ボックスなしでオンラインで使えるサービス型（SaaS）プランを準備しています。",
+"cta.title":"今すぐ体験してみてください","cta.lead":"インストール不要。ブラウザでKURUの画面を実際に操作できます。"
+},
+en:{
+"nav.company":"TEAMPLAYER home",
+"hero.eyebrow":"Messaging for shops",
+"hero.title":"Every message in one place.<br>Every customer record in good hands.",
+"hero.lead":"Receive and answer guest messages from LINE, iMessage, email and web forms on one screen. Reservations, customer records and an AI assistant all connect in KURU.",
+"btn.demo":"Try the demo","btn.contact":"Contact us",
+"mock.title":"Inbox","mock.webform":"Web form","mock.email":"Email",
+"mock.m1n":"Sato","mock.m1":"Can I book for 2 on Saturday at 7 pm?",
+"mock.m2n":"Kim","mock.m2":"Is there parking?",
+"mock.m3n":"Reservation request","mock.m3":"Nov 20, 12:00 · 4 people",
+"mock.m4n":"Smith","mock.m4":"Do you have an English menu?",
+"mock.reply":"The AI assistant drafted a reply → review and send",
+"feat.title":"What KURU does","feat.lead":"Scattered conversations, bookings and customer details, brought together.",
+"f1.t":"Many channels, one screen","f1.d":"No more switching apps for each channel. See every incoming message in one inbox and reply from the same screen.",
+"f2.t":"Reservations and customer records","f2.d":"Take guest reservations and keep each customer's conversations and visits on record, so the next visit goes smoother.",
+"f3.t":"AI assistant","f3.d":"Drafts replies to common questions and sums up today's tasks. The owner checks before anything is sent.",
+"ch.title":"The channels your guests already use","ch.lead":"Your guests don't need to install a new app.",
+"ch.email":"Email","ch.webform":"Web form","ch.kakao":"KakaoTalk","ch.phone":"Phone (demo)",
+"plan.title":"Start the way you like","plan.lead":"Manage from the web or mobile, anywhere, on the same screen.",
+"p1.t":"KURU Box","p1.d":"Buy a dedicated box for your shop and start right away. Customer records are kept on your shop's box.",
+"p2.t":"KURU Cloud","p2.tag":"Coming soon","p2.d":"A service plan (SaaS) you can use online without a box is in preparation.",
+"cta.title":"Try it now","cta.lead":"No installation. Use the KURU screens right in your browser."
+}};
+function pick(){var q=new URLSearchParams(location.search).get('lang');if(T[q])return q;var n=(navigator.language||'').slice(0,2);return T[n]?n:'ko'}
+function apply(l){var d=T[l];document.documentElement.lang=l;
+document.querySelectorAll('[data-i]').forEach(function(e){var v=d[e.getAttribute('data-i')];if(v!=null)e.innerHTML=v});
+document.querySelectorAll('.js-demo').forEach(function(a){a.href='/kuru/demo/?lang='+l});
+document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l)});
+document.title='KURU | '+d['hero.title'].replace('<br>',' ');}
+document.querySelectorAll('[data-lang]').forEach(function(b){b.onclick=function(){var l=b.dataset.lang;history.replaceState(null,'','?lang='+l);apply(l)}});
+apply(pick());
+</script>
+</body>
+</html>
